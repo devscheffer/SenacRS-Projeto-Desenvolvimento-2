@@ -6,6 +6,10 @@ class TicketDataService {
   }
   getNext() {
     return http.get("/tickets/next");
+
+  }
+  getPending() {
+    return http.get("/tickets/pending");
   }
 
   get(id) {

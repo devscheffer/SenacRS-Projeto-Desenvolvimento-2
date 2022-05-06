@@ -10,6 +10,7 @@ module.exports = app => {
   router.get("/", tickets.findAll);
   // Retrieve all Tutorials
   router.get("/next", tickets.findNextTicket);
+  router.get("/pending", tickets.findAllPending);
 
   // Retrieve all published Tutorials
   router.get("/published", tickets.findAllPublished);

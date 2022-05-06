@@ -34,7 +34,7 @@ export default class TicketsList extends Component {
   }
 
   retrieveTickets() {
-    TicketDataService.getAll()
+    TicketDataService.getPending()
       .then(response => {
         this.setState({
           tickets: response.data
@@ -60,15 +60,15 @@ export default class TicketsList extends Component {
       currentIndex: index
     });
   }
-  updatePublished(status) {
+  updatePublished(id,status) {
     var data = {
-      id: this.state.currentTicket.id,
-      title: this.state.currentTicket.title,
-      description: this.state.currentTicket.description,
+      id: id,
+    //   title: this.state.currentTicket.title,
+    //   description: this.state.currentTicket.description,
       published: status
     };
 
-    TicketDataService.update(this.state.currentTicket.id, data)
+    TicketDataService.update(id, data)
       .then(response => {
         this.setState(prevState => ({
           currentTicket: {
@@ -83,15 +83,17 @@ export default class TicketsList extends Component {
       });
   }
   async removeAllTickets() {
-    var nextTicket = await TicketDataService.getNext().then(response=>{return response.data[0].id;})
-    TicketDataService.delete(nextTicket)
-      .then(response => {
-        console.log(response.data);
-        this.refreshList();
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    var nextTicket = await TicketDataService.getNext().then(response=>{return response.data[0].id;});
+    this.updatePublished(nextTicket,true);
+    await this.refreshList();
+    // TicketDataService.delete(nextTicket)
+    //   .then(response => {
+    //     console.log(response.data);
+    //     this.refreshList();
+    //   })
+    //   .catch(e => {
+    //     console.log(e);
+    //   });
   }
 
   searchTitle() {
@@ -197,7 +199,7 @@ export default class TicketsList extends Component {
           ) : (
             <div>
               <br />
-              <p>Please click on a Ticket...</p>
+              <p>Click em um ticket para mais informações...</p>
             </div>
           )}
         </div>
