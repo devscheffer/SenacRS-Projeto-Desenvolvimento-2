@@ -1,33 +1,33 @@
 const db = require("../models");
-const Tutorial = db.tutorials;
+const Ticket = db.tickets;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new Tutorial
+// Create and Save a new Ticket
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.title) {
-    res.status(400).send({
-      message: "Content can not be empty!"
-    });
-    return;
-  }
+//   if (!req.body.title) {
+//     res.status(400).send({
+//       message: "Content can not be empty!"
+//     });
+//     return;
+//   }
 
-  // Create a Tutorial
-  const tutorial = {
+  // Create a Ticket
+  const ticket = {
     title: req.body.title,
     description: req.body.description,
     published: req.body.published ? req.body.published : false
   };
 
-  // Save Tutorial in the database
-  Tutorial.create(tutorial)
+  // Save Ticket in the database
+  Ticket.create(ticket)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Tutorial."
+          err.message || "Some error occurred while creating the Ticket."
       });
     });
 };
@@ -37,92 +37,92 @@ exports.findAll = (req, res) => {
   const title = req.query.title;
   var condition = title ? { title: { [Op.iLike]: `%${title}%` } } : null;
 
-  Tutorial.findAll({ where: condition })
+  Ticket.findAll({ where: condition })
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Some error occurred while retrieving tickets."
       });
     });
 };
 
-// Find a single Tutorial with an id
+// Find a single Ticket with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Tutorial.findByPk(id)
+  Ticket.findByPk(id)
     .then(data => {
       if (data) {
         res.send(data);
       } else {
         res.status(404).send({
-          message: `Cannot find Tutorial with id=${id}.`
+          message: `Cannot find Ticket with id=${id}.`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving Tutorial with id=" + id
+        message: "Error retrieving Ticket with id=" + id
       });
     });
 };
 
-// Update a Tutorial by the id in the request
+// Update a Ticket by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;
 
-  Tutorial.update(req.body, {
+  Ticket.update(req.body, {
     where: { id: id }
   })
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "Tutorial was updated successfully."
+          message: "Ticket was updated successfully."
         });
       } else {
         res.send({
-          message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`
+          message: `Cannot update Ticket with id=${id}. Maybe Ticket was not found or req.body is empty!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating Tutorial with id=" + id
+        message: "Error updating Ticket with id=" + id
       });
     });
 };
 
-// Delete a Tutorial with the specified id in the request
+// Delete a Ticket with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  Tutorial.destroy({
+  Ticket.destroy({
     where: { id: id }
   })
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "Tutorial was deleted successfully!"
+          message: "Ticket was deleted successfully!"
         });
       } else {
         res.send({
-          message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`
+          message: `Cannot delete Ticket with id=${id}. Maybe Ticket was not found!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Could not delete Tutorial with id=" + id
+        message: "Could not delete Ticket with id=" + id
       });
     });
 };
 
 // Delete all Tutorials from the database.
 exports.deleteAll = (req, res) => {
-  Tutorial.destroy({
+  Ticket.destroy({
     where: {},
     truncate: false
   })
@@ -132,21 +132,21 @@ exports.deleteAll = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while removing all tutorials."
+          err.message || "Some error occurred while removing all tickets."
       });
     });
 };
 
-// find all published Tutorial
+// find all published Ticket
 exports.findAllPublished = (req, res) => {
-  Tutorial.findAll({ where: { published: true } })
+  Ticket.findAll({ where: { published: true } })
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Some error occurred while retrieving tickets."
       });
     });
 };

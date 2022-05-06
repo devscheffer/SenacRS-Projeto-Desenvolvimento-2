@@ -12,9 +12,8 @@ export default class AddTutorial extends Component {
     this.state = {
       id: null,
       title: "",
-      description: "", 
+      description: "",
       published: false,
-
       submitted: false
     };
   }
@@ -70,14 +69,15 @@ export default class AddTutorial extends Component {
       <div className="submit-form">
         {this.state.submitted ? (
           <div>
-            <h4>You submitted successfully!</h4>
+            <h4>Ticket Number:</h4>
+            <h4>{this.state.id}</h4>
             <button className="btn btn-success" onClick={this.newTutorial}>
               Add
             </button>
           </div>
         ) : (
           <div>
-            <div className="form-group">
+            {/* <div className="form-group">
               <label htmlFor="title">Title</label>
               <input
                 type="text"
@@ -101,10 +101,10 @@ export default class AddTutorial extends Component {
                 onChange={this.onChangeDescription}
                 name="description"
               />
-            </div>
+            </div> */}
 
             <button onClick={this.saveTutorial} className="btn btn-success">
-              Submit
+              Ticket
             </button>
           </div>
         )}
