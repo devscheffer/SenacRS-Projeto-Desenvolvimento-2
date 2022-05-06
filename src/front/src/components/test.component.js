@@ -7,7 +7,7 @@ export default class Ticket extends Component {
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.getTicket = this.getTicket.bind(this);
-    this.updatePublished = this.updatePublished.bind(this);
+    this.updateticketChecked = this.updateticketChecked.bind(this);
     this.updateTicket = this.updateTicket.bind(this);
     this.deleteTicket = this.deleteTicket.bind(this);
 
@@ -16,7 +16,7 @@ export default class Ticket extends Component {
         id: null,
         title: "",
         description: "",
-        published: false
+        ticketChecked: false
       },
       message: ""
     };
@@ -63,12 +63,12 @@ export default class Ticket extends Component {
       });
   }
 
-  updatePublished(status) {
+  updateticketChecked(status) {
     var data = {
       id: this.state.currentTicket.id,
       title: this.state.currentTicket.title,
       description: this.state.currentTicket.description,
-      published: status
+      ticketChecked: status
     };
 
     TicketDataService.update(this.state.currentTicket.id, data)
@@ -76,7 +76,7 @@ export default class Ticket extends Component {
         this.setState(prevState => ({
           currentTicket: {
             ...prevState.currentTicket,
-            published: status
+            ticketChecked: status
           }
         }));
         console.log(response.data);
@@ -147,21 +147,21 @@ export default class Ticket extends Component {
                 <label>
                   <strong>Status:</strong>
                 </label>
-                {currentTicket.published ? "Published" : "Pending"}
+                {currentTicket.ticketChecked ? "ticketChecked" : "Pending"}
               </div>
             </form>
 
-            {currentTicket.published ? (
+            {currentTicket.ticketChecked ? (
               <button
                 className="badge badge-primary mr-2"
-                onClick={() => this.updatePublished(false)}
+                onClick={() => this.updateticketChecked(false)}
               >
                 UnPublish
               </button>
             ) : (
               <button
                 className="badge badge-primary mr-2"
-                onClick={() => this.updatePublished(true)}
+                onClick={() => this.updateticketChecked(true)}
               >
                 Publish
               </button>

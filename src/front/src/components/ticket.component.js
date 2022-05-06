@@ -13,7 +13,7 @@ export default class AddTicket extends Component {
       id: null,
       title: "",
       description: "",
-      published: false,
+      ticketChecked: false,
       submitted: false
     };
   }
@@ -42,7 +42,7 @@ export default class AddTicket extends Component {
           id: response.data.id,
           title: response.data.title,
           description: response.data.description,
-          published: response.data.published,
+          ticketChecked: response.data.ticketChecked,
 
           submitted: true
         });
@@ -58,7 +58,7 @@ export default class AddTicket extends Component {
       id: null,
       title: "",
       description: "",
-      published: false,
+      ticketChecked: false,
 
       submitted: false
     });

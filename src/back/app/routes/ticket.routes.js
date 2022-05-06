@@ -6,14 +6,14 @@ module.exports = app => {
   // Create a new Ticket
   router.post("/", tickets.create);
 
-  // Retrieve all Tutorials
+  // Retrieve all Tickets
   router.get("/", tickets.findAll);
-  // Retrieve all Tutorials
+  // Retrieve all Tickets
   router.get("/next", tickets.findNextTicket);
   router.get("/pending", tickets.findAllPending);
 
-  // Retrieve all published Tutorials
-  router.get("/published", tickets.findAllPublished);
+  // Retrieve all ticketChecked Tickets
+  router.get("/ticketChecked", tickets.findAllticketChecked);
 
   // Retrieve a single Ticket with id
   router.get("/:id", tickets.findOne);
@@ -24,7 +24,7 @@ module.exports = app => {
   // Delete a Ticket with id
   router.delete("/:id", tickets.delete);
 
-  // Delete all Tutorials
+  // Delete all Tickets
   router.delete("/", tickets.deleteAll);
 
   app.use("/api/tickets", router);

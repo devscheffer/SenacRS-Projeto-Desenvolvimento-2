@@ -1,13 +1,19 @@
 module.exports = (sequelize, Sequelize) => {
   const Ticket = sequelize.define("ticket", {
-    title: {
+    queue: {
       type: Sequelize.STRING
     },
     description: {
       type: Sequelize.STRING
     },
-    published: {
+    ticketChecked: {
       type: Sequelize.BOOLEAN
+    },
+    ticketChecked_ts: {
+      type: Sequelize.DATE
+    },
+    user: {
+      type: Sequelize.STRING
     }
   });
 

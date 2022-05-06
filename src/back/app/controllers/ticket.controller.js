@@ -16,7 +16,7 @@ exports.create = (req, res) => {
   const ticket = {
     title: req.body.title,
     description: req.body.description,
-    published: req.body.published ? req.body.published : false
+    ticketChecked: req.body.ticketChecked ? req.body.ticketChecked : false
   };
 
   // Save Ticket in the database
@@ -137,9 +137,9 @@ exports.deleteAll = (req, res) => {
     });
 };
 
-// find all published Ticket
-exports.findAllPublished = (req, res) => {
-  Ticket.findAll({ where: { published: true } })
+// find all ticketChecked Ticket
+exports.findAllticketChecked = (req, res) => {
+  Ticket.findAll({ where: { ticketChecked: true } })
     .then(data => {
       res.send(data);
     })
@@ -151,7 +151,7 @@ exports.findAllPublished = (req, res) => {
     });
 };
 exports.findNextTicket = (req, res) => {
-  Ticket.findAll({ where: { published: false },orderby:1,limit:1 })
+  Ticket.findAll({ where: { ticketChecked: false },orderby:1,limit:1 })
     .then(data => {
       res.send(data);
     })
@@ -163,7 +163,7 @@ exports.findNextTicket = (req, res) => {
     });
 };
 exports.findAllPending = (req, res) => {
-    Ticket.findAll({ where: { published: false }})
+    Ticket.findAll({ where: { ticketChecked: false }})
       .then(data => {
         res.send(data);
       })

@@ -11,7 +11,7 @@ export default class TicketsList extends Component {
     this.setActiveTicket = this.setActiveTicket.bind(this);
     this.removeAllTickets = this.removeAllTickets.bind(this);
     this.searchTitle = this.searchTitle.bind(this);
-    this.updatePublished = this.updatePublished.bind(this);
+    this.updateticketChecked = this.updateticketChecked.bind(this);
 
     this.state = {
       tickets: [],
@@ -60,12 +60,12 @@ export default class TicketsList extends Component {
       currentIndex: index
     });
   }
-  updatePublished(id,status) {
+  updateticketChecked(id,status) {
     var data = {
       id: id,
     //   title: this.state.currentTicket.title,
     //   description: this.state.currentTicket.description,
-      published: status
+      ticketChecked: status
     };
 
     TicketDataService.update(id, data)
@@ -73,7 +73,7 @@ export default class TicketsList extends Component {
         this.setState(prevState => ({
           currentTicket: {
             ...prevState.currentTicket,
-            published: status
+            ticketChecked: status
           }
         }));
         console.log(response.data);
@@ -84,7 +84,7 @@ export default class TicketsList extends Component {
   }
   async removeAllTickets() {
     var nextTicket = await TicketDataService.getNext().then(response=>{return response.data[0].id;});
-    this.updatePublished(nextTicket,true);
+    this.updateticketChecked(nextTicket,true);
     await this.refreshList();
     // TicketDataService.delete(nextTicket)
     //   .then(response => {
@@ -186,7 +186,7 @@ export default class TicketsList extends Component {
                 <label>
                   <strong>Status:</strong>
                 </label>{" "}
-                {currentTicket.published ? "Published" : "Pending"}
+                {currentTicket.ticketChecked ? "ticketChecked" : "Pending"}
               </div>
 
               {/* <Link
