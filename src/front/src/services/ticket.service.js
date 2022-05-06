@@ -1,8 +1,11 @@
 import http from "../http-common";
 
-class TutorialDataService {
+class TicketDataService {
   getAll() {
     return http.get("/tickets");
+  }
+  getNext() {
+    return http.get("/tickets/next");
   }
 
   get(id) {
@@ -30,4 +33,4 @@ class TutorialDataService {
   }
 }
 
-export default new TutorialDataService();
+export default new TicketDataService();

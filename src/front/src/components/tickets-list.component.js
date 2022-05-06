@@ -1,27 +1,28 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import TicketDataService from "../services/ticket.service";
 import { Link } from "react-router-dom";
 
-export default class TutorialsList extends Component {
+export default class TicketsList extends Component {
   constructor(props) {
     super(props);
     this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
-    this.retrieveTutorials = this.retrieveTutorials.bind(this);
+    this.retrieveTickets = this.retrieveTickets.bind(this);
     this.refreshList = this.refreshList.bind(this);
-    this.setActiveTutorial = this.setActiveTutorial.bind(this);
-    this.removeAllTutorials = this.removeAllTutorials.bind(this);
+    this.setActiveTicket = this.setActiveTicket.bind(this);
+    this.removeAllTickets = this.removeAllTickets.bind(this);
     this.searchTitle = this.searchTitle.bind(this);
+    this.updatePublished = this.updatePublished.bind(this);
 
     this.state = {
-      tutorials: [],
-      currentTutorial: null,
+      tickets: [],
+      currentTicket: null,
       currentIndex: -1,
       searchTitle: ""
     };
   }
 
   componentDidMount() {
-    this.retrieveTutorials();
+    this.retrieveTickets();
   }
 
   onChangeSearchTitle(e) {
@@ -32,11 +33,11 @@ export default class TutorialsList extends Component {
     });
   }
 
-  retrieveTutorials() {
-    TutorialDataService.getAll()
+  retrieveTickets() {
+    TicketDataService.getAll()
       .then(response => {
         this.setState({
-          tutorials: response.data
+          tickets: response.data
         });
         console.log(response.data);
       })
@@ -46,22 +47,44 @@ export default class TutorialsList extends Component {
   }
 
   refreshList() {
-    this.retrieveTutorials();
+    this.retrieveTickets();
     this.setState({
-      currentTutorial: null,
+      currentTicket: null,
       currentIndex: -1
     });
   }
 
-  setActiveTutorial(tutorial, index) {
+  setActiveTicket(ticket, index) {
     this.setState({
-      currentTutorial: tutorial,
+      currentTicket: ticket,
       currentIndex: index
     });
   }
+  updatePublished(status) {
+    var data = {
+      id: this.state.currentTicket.id,
+      title: this.state.currentTicket.title,
+      description: this.state.currentTicket.description,
+      published: status
+    };
 
-  removeAllTutorials() {
-    TutorialDataService.deleteAll()
+    TicketDataService.update(this.state.currentTicket.id, data)
+      .then(response => {
+        this.setState(prevState => ({
+          currentTicket: {
+            ...prevState.currentTicket,
+            published: status
+          }
+        }));
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+  async removeAllTickets() {
+    var nextTicket = await TicketDataService.getNext().then(response=>{return response.data[0].id;})
+    TicketDataService.delete(nextTicket)
       .then(response => {
         console.log(response.data);
         this.refreshList();
@@ -73,30 +96,31 @@ export default class TutorialsList extends Component {
 
   searchTitle() {
     this.setState({
-      currentTutorial: null,
+      currentTicket: null,
       currentIndex: -1
     });
 
-    TutorialDataService.findByTitle(this.state.searchTitle)
+    TicketDataService.findByTitle(this.state.searchTitle)
       .then(response => {
         this.setState({
-          tutorials: response.data
+          tickets: response.data
         });
         console.log(response.data);
       })
       .catch(e => {
         console.log(e);
+
       });
   }
 
   render() {
-    const { searchTitle, tutorials, currentTutorial, currentIndex } = this.state;
+    const { searchTitle, tickets, currentTicket, currentIndex } = this.state;
 
     return (
       <div className="list row">
         <div className="col-md-8">
           <div className="input-group mb-3">
-            <input
+            {/* <input
               type="text"
               className="form-control"
               placeholder="Search by title"
@@ -111,69 +135,69 @@ export default class TutorialsList extends Component {
               >
                 Search
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="col-md-6">
-          <h4>Tutorials List</h4>
+          <h4>Tickets List</h4>
 
           <ul className="list-group">
-            {tutorials &&
-              tutorials.map((tutorial, index) => (
+            {tickets &&
+              tickets.map((ticket, index) => (
                 <li
                   className={
                     "list-group-item " +
                     (index === currentIndex ? "active" : "")
                   }
-                  onClick={() => this.setActiveTutorial(tutorial, index)}
+                  onClick={() => this.setActiveTicket(ticket, index)}
                   key={index}
                 >
-                  {tutorial.title}
+                  {ticket.id}
                 </li>
               ))}
           </ul>
 
           <button
             className="m-3 btn btn-sm btn-danger"
-            onClick={this.removeAllTutorials}
+            onClick={this.removeAllTickets}
           >
-            Remove All
+            Call next ticket
           </button>
         </div>
         <div className="col-md-6">
-          {currentTutorial ? (
+          {currentTicket ? (
             <div>
-              <h4>Tutorial</h4>
-              <div>
+              <h4>Ticket</h4>
+              {/* <div>
                 <label>
                   <strong>Title:</strong>
                 </label>{" "}
-                {currentTutorial.title}
-              </div>
+                {currentTicket.title}
+              </div> */}
               <div>
                 <label>
                   <strong>Description:</strong>
                 </label>{" "}
-                {currentTutorial.description}
+                {currentTicket.description}
               </div>
               <div>
                 <label>
                   <strong>Status:</strong>
                 </label>{" "}
-                {currentTutorial.published ? "Published" : "Pending"}
+                {currentTicket.published ? "Published" : "Pending"}
               </div>
 
-              <Link
-                to={"/tutorials/" + currentTutorial.id}
+              {/* <Link
+                to={"/tickets/" + currentTicket.id}
                 className="badge badge-warning"
               >
                 Edit
-              </Link>
+              </Link> */}
             </div>
           ) : (
             <div>
               <br />
-              <p>Please click on a Tutorial...</p>
+              <p>Please click on a Ticket...</p>
             </div>
           )}
         </div>

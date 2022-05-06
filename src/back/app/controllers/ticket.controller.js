@@ -150,3 +150,15 @@ exports.findAllPublished = (req, res) => {
       });
     });
 };
+exports.findNextTicket = (req, res) => {
+  Ticket.findAll({ where: { published: false },orderby:1,limit:1 })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tickets."
+      });
+    });
+};

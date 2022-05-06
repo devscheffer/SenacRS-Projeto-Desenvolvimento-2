@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import TicketDataService from "../services/ticket.service";
 
-export default class AddTutorial extends Component {
+export default class AddTicket extends Component {
   constructor(props) {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.saveTutorial = this.saveTutorial.bind(this);
-    this.newTutorial = this.newTutorial.bind(this);
+    this.saveTicket = this.saveTicket.bind(this);
+    this.newTicket = this.newTicket.bind(this);
 
     this.state = {
       id: null,
@@ -30,13 +30,13 @@ export default class AddTutorial extends Component {
     });
   }
 
-  saveTutorial() {
+  saveTicket() {
     var data = {
       title: this.state.title,
       description: this.state.description
     };
 
-    TutorialDataService.create(data)
+    TicketDataService.create(data)
       .then(response => {
         this.setState({
           id: response.data.id,
@@ -53,7 +53,7 @@ export default class AddTutorial extends Component {
       });
   }
 
-  newTutorial() {
+  newTicket() {
     this.setState({
       id: null,
       title: "",
@@ -71,7 +71,7 @@ export default class AddTutorial extends Component {
           <div>
             <h4>Ticket Number:</h4>
             <h4>{this.state.id}</h4>
-            <button className="btn btn-success" onClick={this.newTutorial}>
+            <button className="btn btn-success" onClick={this.newTicket}>
               Add
             </button>
           </div>
@@ -103,7 +103,7 @@ export default class AddTutorial extends Component {
               />
             </div> */}
 
-            <button onClick={this.saveTutorial} className="btn btn-success">
+            <button onClick={this.saveTicket} className="btn btn-success">
               Ticket
             </button>
           </div>
