@@ -4,46 +4,55 @@ import TicketDataService from "../services/ticket.service";
 export default class AddTicket extends Component {
   constructor(props) {
     super(props);
-    this.onChangeTitle = this.onChangeTitle.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
     this.saveTicket = this.saveTicket.bind(this);
     this.newTicket = this.newTicket.bind(this);
 
     this.state = {
       id: null,
-      title: "",
+      queue: "fila1",
       description: "",
       ticketChecked: false,
+      user: "person1",
       submitted: false
     };
   }
-
-  onChangeTitle(e) {
+  newTicket() {
     this.setState({
-      title: e.target.value
+        id: null,
+        queue: "fila1",
+        description: "",
+        ticketChecked: false,
+        user: "person1",
+        submitted: false
     });
   }
+//   onChangeTitle(e) {
+//     this.setState({
+//       title: e.target.value
+//     });
+//   }
 
-  onChangeDescription(e) {
-    this.setState({
-      description: e.target.value
-    });
-  }
+//   onChangeDescription(e) {
+//     this.setState({
+//       description: e.target.value
+//     });
+//   }
 
   saveTicket() {
     var data = {
-      title: this.state.title,
-      description: this.state.description
+      queue: this.state.queue,
+      description: this.state.description,
+      user: this.state.user
     };
 
     TicketDataService.create(data)
       .then(response => {
         this.setState({
           id: response.data.id,
-          title: response.data.title,
+          queue: response.data.queue,
           description: response.data.description,
           ticketChecked: response.data.ticketChecked,
-
+          user: response.data.user,
           submitted: true
         });
         console.log(response.data);
@@ -53,16 +62,7 @@ export default class AddTicket extends Component {
       });
   }
 
-  newTicket() {
-    this.setState({
-      id: null,
-      title: "",
-      description: "",
-      ticketChecked: false,
 
-      submitted: false
-    });
-  }
 
   render() {
     return (
@@ -77,32 +77,6 @@ export default class AddTicket extends Component {
           </div>
         ) : (
           <div>
-            {/* <div className="form-group">
-              <label htmlFor="title">Title</label>
-              <input
-                type="text"
-                className="form-control"
-                id="title"
-                required
-                value={this.state.title}
-                onChange={this.onChangeTitle}
-                name="title"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="description">Description</label>
-              <input
-                type="text"
-                className="form-control"
-                id="description"
-                required
-                value={this.state.description}
-                onChange={this.onChangeDescription}
-                name="description"
-              />
-            </div> */}
-
             <button onClick={this.saveTicket} className="btn btn-success">
               Ticket
             </button>

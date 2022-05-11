@@ -25,6 +25,7 @@ export default class TicketsList extends Component {
 
 	componentDidMount() {
 		this.retrieveTickets();
+        this.CountPending();
 	}
 
 	onChangeSearchTitle(e) {
@@ -51,6 +52,8 @@ export default class TicketsList extends Component {
 
 	refreshList() {
 		this.retrieveTickets();
+        this.CountPending();
+
 		this.setState({
 			currentTicket: null,
 			currentIndex: -1,
@@ -69,7 +72,7 @@ export default class TicketsList extends Component {
 		TicketDataService.getCountPending()
 			.then((response) => {
 				this.setState({
-					total_tickets: response.data,
+					total_tickets: response.data.total,
 				});
 				console.log("testando gerson");
 				console.log(response.data);
@@ -125,14 +128,14 @@ export default class TicketsList extends Component {
 	}
 
 	render() {
-		const {tickets, currentTicket, currentIndex} =
+		const {tickets, currentTicket, currentIndex,total_tickets} =
 			this.state;
 
 		return (
 			<div className="list row">
 				<div className="col-md-6">
 					<h4>Tickets List</h4>
-					<h3>Total pending tickes: {this.CountPending()}</h3>
+					<h3>Total pending tickes: {total_tickets}</h3>
 					<ul className="list-group">
 						{tickets &&
 							tickets.map((ticket, index) => (
