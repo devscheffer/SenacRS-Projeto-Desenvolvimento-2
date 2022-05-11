@@ -12,6 +12,10 @@ class TicketDataService {
     return http.get("/tickets/pending");
   }
 
+  getCountPending() {
+    return http.get("/tickets/countpending");
+  }
+
   get(id) {
     return http.get(`/tickets/${id}`);
   }

@@ -1,31 +1,36 @@
-module.exports = app => {
-  const tickets = require("../controllers/ticket.controller.js");
+/** @format */
 
-  var router = require("express").Router();
+module.exports = (app) => {
+	const tickets = require("../controllers/ticket.controller.js");
 
-  // Create a new Ticket
-  router.post("/", tickets.create);
+	var router = require("express").Router();
 
-  // Retrieve all Tickets
-  router.get("/", tickets.findAll);
-  // Retrieve all Tickets
-  router.get("/next", tickets.findNextTicket);
-  router.get("/pending", tickets.findAllPending);
+	// Create a new Ticket
+	router.post("/", tickets.create);
 
-  // Retrieve all ticketChecked Tickets
-  router.get("/ticketChecked", tickets.findAllticketChecked);
+	// Retrieve all Tickets
+	router.get("/", tickets.findAll);
+	// Retrieve next Tickets
+	router.get("/next", tickets.findNextTicket);
+	// Retrieve all Tickets pending
+	router.get("/pending", tickets.findAllPending);
+	// Retrieve total Tickets pending
+	router.get("/countpending", tickets.countPending);
 
-  // Retrieve a single Ticket with id
-  router.get("/:id", tickets.findOne);
+	// Retrieve all ticketChecked Tickets
+	router.get("/ticketChecked", tickets.findAllticketChecked);
 
-  // Update a Ticket with id
-  router.put("/:id", tickets.update);
+	// Retrieve a single Ticket with id
+	router.get("/:id", tickets.findOne);
 
-  // Delete a Ticket with id
-  router.delete("/:id", tickets.delete);
+	// Update a Ticket with id
+	router.put("/:id", tickets.update);
 
-  // Delete all Tickets
-  router.delete("/", tickets.deleteAll);
+	// Delete a Ticket with id
+	router.delete("/:id", tickets.delete);
 
-  app.use("/api/tickets", router);
+	// Delete all Tickets
+	router.delete("/", tickets.deleteAll);
+
+	app.use("/api/tickets", router);
 };
