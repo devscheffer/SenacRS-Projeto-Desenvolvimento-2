@@ -25,7 +25,7 @@ export default class TicketsList extends Component {
 
 	componentDidMount() {
 		this.retrieveTickets();
-        this.CountPending();
+		this.CountPending();
 	}
 
 	onChangeSearchTitle(e) {
@@ -52,7 +52,7 @@ export default class TicketsList extends Component {
 
 	refreshList() {
 		this.retrieveTickets();
-        this.CountPending();
+		this.CountPending();
 
 		this.setState({
 			currentTicket: null,
@@ -74,7 +74,6 @@ export default class TicketsList extends Component {
 				this.setState({
 					total_tickets: response.data.total,
 				});
-				console.log("testando gerson");
 				console.log(response.data);
 			})
 			.catch((e) => {
@@ -128,31 +127,13 @@ export default class TicketsList extends Component {
 	}
 
 	render() {
-		const {tickets, currentTicket, currentIndex,total_tickets} =
+		const {tickets, currentTicket, currentIndex, total_tickets} =
 			this.state;
 
 		return (
-			<div className="list row">
-				<div className="col-md-6">
-					<h4>Tickets List</h4>
-					<h3>Total pending tickes: {total_tickets}</h3>
-					<ul className="list-group">
-						{tickets &&
-							tickets.map((ticket, index) => (
-								<li
-									className={
-										"list-group-item " +
-										(index === currentIndex ? "active" : "")
-									}
-									onClick={() =>
-										this.setActiveTicket(ticket, index)
-									}
-									key={index}
-								>
-									{ticket.id}
-								</li>
-							))}
-					</ul>
+			<div class="container_atendente">
+				<div class="botao">
+					<p>Total pending tickes: {total_tickets}</p>
 					<button
 						className="m-3 btn btn-sm btn-danger"
 						onClick={this.removeAllTickets}
@@ -160,31 +141,64 @@ export default class TicketsList extends Component {
 						Call next ticket
 					</button>
 				</div>
-				<div className="col-md-6">
-					{currentTicket ? (
-						<div>
-							<h4>Ticket</h4>
-							<div>
-								<label>
-									<strong>Description:</strong>
-								</label>{" "}
-								{currentTicket.description}
-							</div>
-							<div>
-								<label>
-									<strong>Status:</strong>
-								</label>{" "}
-								{currentTicket.ticketChecked
-									? "ticketChecked"
-									: "Pending"}
-							</div>
+				<div class="lista">
+					<div className="list row">
+						<div className="col-md-6">
+							<h4>Tickets List</h4>
+							<ul className="list-group">
+								{tickets &&
+									tickets.map((ticket, index) => (
+										<li
+											className={
+												"list-group-item " +
+												(index === currentIndex
+													? "active"
+													: "")
+											}
+											onClick={() =>
+												this.setActiveTicket(
+													ticket,
+													index
+												)
+											}
+											key={index}
+										>
+											{ticket.id}
+										</li>
+									))}
+							</ul>
 						</div>
-					) : (
-						<div>
-							<br />
-							<p>Click em um ticket para mais informações...</p>
-						</div>
-					)}
+					</div>
+				</div>
+				<div class="description">
+					<div className="col-md-6">
+						{currentTicket ? (
+							<div>
+								<h4>Ticket</h4>
+								<div>
+									<label>
+										<strong>Description:</strong>
+									</label>{" "}
+									{currentTicket.description}
+								</div>
+								<div>
+									<label>
+										<strong>Status:</strong>
+									</label>{" "}
+									{currentTicket.ticketChecked
+										? "ticketChecked"
+										: "Pending"}
+								</div>
+							</div>
+						) : (
+							<div>
+								<br />
+								<p>
+									Click em um ticket para mais informações...
+								</p>
+							</div>
+						)}
+					</div>
 				</div>
 			</div>
 		);

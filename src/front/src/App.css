@@ -13,3 +13,59 @@
   max-width: 300px;
   margin: auto;
 }
+.container_cliente {  display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "Botao Botao Total-de-pessoas Media-atendimento"
+      "Botao Botao Tempo-de-espera Extra";
+  }
+
+  .Botao { grid-area: Botao;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+  .Total-de-pessoas { grid-area: Total-de-pessoas; }
+
+  .Media-atendimento { grid-area: Media-atendimento; }
+
+  .Tempo-de-espera { grid-area: Tempo-de-espera; }
+
+  .Extra { grid-area: Extra; }
+
+  .container_atendente {  display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "botao lista description";
+  }
+
+
+  .lista { grid-area: lista; }
+
+  .description { grid-area: description; }
+  .container_gerente {  display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "graph1 graph2"
+      "graph3 graph4";
+  }
+
+  .graph1 { grid-area: graph1; }
+
+  .graph2 { grid-area: graph2; }
+
+  .graph3 { grid-area: graph3; }
+
+  .graph4 { grid-area: graph4; }

@@ -66,37 +66,12 @@ export default class AddTicket extends Component {
 
 	render() {
 		return (
-			<div class="container_cliente">
-				<div class="Botao">
-					<div className="submit-form">
-						{this.state.submitted ? (
-							<div>
-								<h4>Ticket Number:</h4>
-								<h4>{this.state.id}</h4>
-								<button
-									className="btn btn-success"
-									onClick={this.newTicket}
-								>
-									Add
-								</button>
-							</div>
-						) : (
-							<div>
-								<button
-									onClick={this.saveTicket}
-									className="btn btn-success"
-								>
-									Ticket
-								</button>
-							</div>
-						)}
-					</div>
-				</div>
-				<div class="Total-de-pessoas"></div>
-				<div class="Media-atendimento"></div>
-				<div class="Tempo-de-espera"></div>
-				<div class="Extra"></div>
-			</div>
+			<div class="container_gerente">
+  <div class="graph1"></div>
+  <div class="graph2"></div>
+  <div class="graph3"></div>
+  <div class="graph4"></div>
+</div>
 		);
 	}
 }
