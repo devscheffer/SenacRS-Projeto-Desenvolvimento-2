@@ -10,7 +10,7 @@ export default class TicketsList extends Component {
 		this.retrieveTickets = this.retrieveTickets.bind(this);
 		this.refreshList = this.refreshList.bind(this);
 		this.setActiveTicket = this.setActiveTicket.bind(this);
-		this.removeAllTickets = this.removeAllTickets.bind(this);
+		this.get_next_ticket = this.get_next_ticket.bind(this);
 		this.searchTitle = this.searchTitle.bind(this);
 		this.updateticketChecked = this.updateticketChecked.bind(this);
 		this.CountPending = this.CountPending.bind(this);
@@ -20,6 +20,7 @@ export default class TicketsList extends Component {
 			currentTicket: null,
 			currentIndex: -1,
 			searchTitle: "",
+			id: "",
 		};
 	}
 
@@ -51,24 +52,26 @@ export default class TicketsList extends Component {
 	}
 
 	refreshList() {
-		this.retrieveTickets();
-		this.CountPending();
+        this.CountPending();
+        this.retrieveTickets();
 
 		this.setState({
-			currentTicket: null,
+            currentTicket: null,
 			currentIndex: -1,
+            id:""
 		});
 	}
 
-	setActiveTicket(ticket, index) {
+	setActiveTicket(ticket, index,id) {
+        this.refreshList();
 		this.setState({
 			currentTicket: ticket,
 			currentIndex: index,
+			id: id,
 		});
 	}
 
 	CountPending() {
-		console.log("testando gerson");
 		TicketDataService.getCountPending()
 			.then((response) => {
 				this.setState({
@@ -84,6 +87,7 @@ export default class TicketsList extends Component {
 		var data = {
 			id: id,
 			ticketChecked: status,
+            ticketChecked_ts: Date.now()
 		};
 
 		TicketDataService.update(id, data)
@@ -92,6 +96,8 @@ export default class TicketsList extends Component {
 					currentTicket: {
 						...prevState.currentTicket,
 						ticketChecked: status,
+                        ticketChecked_ts: Date.now(),
+                        id:id
 					},
 				}));
 				console.log(response.data);
@@ -100,12 +106,16 @@ export default class TicketsList extends Component {
 				console.log(e);
 			});
 	}
-	async removeAllTickets() {
-		var nextTicket = await TicketDataService.getNext().then((response) => {
-			return response.data[0].id;
-		});
-		this.updateticketChecked(nextTicket, true);
-		await this.refreshList();
+	async get_next_ticket() {
+		var nextTicket = await TicketDataService.getNext()
+        try{
+            this.updateticketChecked(nextTicket.data[0].id, true);
+            this.refreshList();
+            return nextTicket.data[0].id;
+        }
+        catch(err) {
+            console.log(err);
+        }
 	}
 
 	searchTitle() {
@@ -129,19 +139,21 @@ export default class TicketsList extends Component {
 	render() {
 		const {tickets, currentTicket, currentIndex, total_tickets} =
 			this.state;
+            console.log(`teste ticket: ${currentTicket}`);
+            console.log(currentTicket);
 
 		return (
-			<div class="container_atendente">
-				<div class="botao">
+			<div className="container_atendente">
+				<div className="botao">
 					<p>Total pending tickes: {total_tickets}</p>
 					<button
 						className="m-3 btn btn-sm btn-danger"
-						onClick={this.removeAllTickets}
+						onClick={this.get_next_ticket}
 					>
 						Call next ticket
 					</button>
 				</div>
-				<div class="lista">
+				<div className="lista">
 					<div className="list row">
 						<div className="col-md-6">
 							<h4>Tickets List</h4>
@@ -170,11 +182,11 @@ export default class TicketsList extends Component {
 						</div>
 					</div>
 				</div>
-				<div class="description">
+				<div className="description">
 					<div className="col-md-6">
 						{currentTicket ? (
 							<div>
-								<h4>Ticket</h4>
+								<h4>Ticket: {currentTicket.id}</h4>
 								<div>
 									<label>
 										<strong>Description:</strong>

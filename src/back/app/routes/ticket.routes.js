@@ -7,6 +7,10 @@ module.exports = (app) => {
 
 	// Create a new Ticket
 	router.post("/", tickets.create);
+	// Get n tickets in front
+	router.get("/get_n_ticket_front", tickets.get_n_ticket_front);
+	// Get avg service time
+	// router.get("/get_avg_service_time", tickets.get_avg_service_time);
 
 	// Retrieve all Tickets
 	router.get("/", tickets.findAll);
@@ -14,9 +18,10 @@ module.exports = (app) => {
 	router.get("/next", tickets.findNextTicket);
 	// Retrieve all Tickets pending
 	router.get("/pending", tickets.findAllPending);
+	// Retrieve all Tickets pending
+	router.get("/notpending", tickets.findAllNotPending);
 	// Retrieve total Tickets pending
 	router.get("/countpending", tickets.countPending);
-	router.get("/get_n_ticket_front", tickets.get_n_ticket_front);
 
 	// Retrieve all ticketChecked Tickets
 	router.get("/ticketChecked", tickets.findAllticketChecked);

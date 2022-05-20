@@ -22,23 +22,22 @@ exports.create = async (req, res) => {
 		});
 	}
 };
+
 // Get all in front
 exports.get_n_ticket_front = async (req, res) => {
-	const id = req.params.id;
-	var condition = id ? {ticketChecked_ts: null,id: gt `%${id}%`} : null;
-
-	const query = await Ticket.findAll({where: condition})
-    try{
-        let query_size = query.length
-        res.send({n_ticket_front:query_size})
-    }
-    catch(err){
-        res.status(500).send({
-            message:
-                err.message || "Some error occurred while retrieving tickets.",
-        });
-    }
+	const query = await Ticket.findAll({where: {ticketChecked: false}});
+	try {
+		let query_size = query.length;
+		res.send({n_ticket_front: query_size});
+	} catch (err) {
+		res.status(500).send({
+			message:
+				err.message || "Some error occurred while retrieving tickets.",
+		});
+	}
 };
+
+// Get avg service time
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
 	const title = req.query.title;
@@ -175,6 +174,19 @@ exports.findNextTicket = (req, res) => {
 };
 exports.findAllPending = (req, res) => {
 	Ticket.findAll({where: {ticketChecked: false}})
+		.then((data) => {
+			res.send(data);
+		})
+		.catch((err) => {
+			res.status(500).send({
+				message:
+					err.message ||
+					"Some error occurred while retrieving tickets.",
+			});
+		});
+};
+exports.findAllNotPending = (req, res) => {
+	Ticket.findAll({where: {ticketChecked: true}})
 		.then((data) => {
 			res.send(data);
 		})

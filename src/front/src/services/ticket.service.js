@@ -11,6 +11,10 @@ class TicketDataService {
 	get_n_ticket_front() {
 		return http.get("/tickets/get_n_ticket_front");
 	}
+    // Get avg service time
+	get_avg_service_time() {
+		return http.get("/tickets/get_avg_service_time");
+	}
 	getAll() {
 		return http.get("/tickets");
 	}
@@ -19,6 +23,9 @@ class TicketDataService {
 	}
 	getPending() {
 		return http.get("/tickets/pending");
+	}
+	getNotPending() {
+		return http.get("/tickets/notpending");
 	}
 
 	getCountPending() {
