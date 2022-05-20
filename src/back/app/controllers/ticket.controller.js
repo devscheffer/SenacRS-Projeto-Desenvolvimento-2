@@ -4,38 +4,41 @@ const db = require("../models");
 const Ticket = db.tickets;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new Ticket
-exports.create = (req, res) => {
-	// Validate request
-	//   if (!req.body.title) {
-	//     res.status(400).send({
-	//       message: "Content can not be empty!"
-	//     });
-	//     return;
-	//   }
-
-	// Create a Ticket
+// Create a new Ticket
+exports.create = async (req, res) => {
 	const ticket = {
 		queue: req.body.queue,
 		description: req.body.description,
 		ticketChecked: req.body.ticketChecked ? req.body.ticketChecked : false,
 		user: req.body.user,
 	};
-
-	// Save Ticket in the database
-	Ticket.create(ticket)
-		.then((data) => {
-			res.send(data);
-		})
-		.catch((err) => {
-			res.status(500).send({
-				message:
-					err.message ||
-					"Some error occurred while creating the Ticket.",
-			});
+	try {
+		const ticket_new = await Ticket.create(ticket);
+		res.send(ticket_new);
+	} catch (err) {
+		res.status(500).send({
+			message:
+				err.message || "Some error occurred while creating the Ticket.",
 		});
+	}
 };
+// Get all in front
+exports.get_n_ticket_front = async (req, res) => {
+	const id = req.params.id;
+	var condition = id ? {ticketChecked_ts: null,id: gt `%${id}%`} : null;
 
+	const query = await Ticket.findAll({where: condition})
+    try{
+        let query_size = query.length
+        res.send({n_ticket_front:query_size})
+    }
+    catch(err){
+        res.status(500).send({
+            message:
+                err.message || "Some error occurred while retrieving tickets.",
+        });
+    }
+};
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
 	const title = req.query.title;
@@ -184,12 +187,10 @@ exports.findAllPending = (req, res) => {
 		});
 };
 exports.countPending = (req, res) => {
-	Ticket.findAll(
-        {where: {ticketChecked: false}}
-        )
+	Ticket.findAll({where: {ticketChecked: false}})
 		.then((data) => {
-            let length = data.length;
-			res.send({"total":length});
+			let length = data.length;
+			res.send({total: length});
 		})
 		.catch((err) => {
 			res.status(500).send({

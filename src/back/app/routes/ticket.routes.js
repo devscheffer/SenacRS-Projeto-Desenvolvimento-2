@@ -16,6 +16,7 @@ module.exports = (app) => {
 	router.get("/pending", tickets.findAllPending);
 	// Retrieve total Tickets pending
 	router.get("/countpending", tickets.countPending);
+	router.get("/get_n_ticket_front", tickets.get_n_ticket_front);
 
 	// Retrieve all ticketChecked Tickets
 	router.get("/ticketChecked", tickets.findAllticketChecked);

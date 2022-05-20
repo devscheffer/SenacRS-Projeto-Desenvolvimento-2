@@ -8,7 +8,9 @@ export default class AddTicket extends Component {
 		super(props);
 		this.saveTicket = this.saveTicket.bind(this);
 		this.newTicket = this.newTicket.bind(this);
+		this.n_ticket_front = this.n_ticket_front.bind(this);
 
+		this.n_ticket_front();
 		this.state = {
 			id: null,
 			queue: "fila1",
@@ -16,6 +18,7 @@ export default class AddTicket extends Component {
 			ticketChecked: false,
 			user: "person1",
 			submitted: false,
+			n_ticket_front: null,
 		};
 	}
 	newTicket() {
@@ -28,46 +31,46 @@ export default class AddTicket extends Component {
 			submitted: false,
 		});
 	}
-	//   onChangeTitle(e) {
-	//     this.setState({
-	//       title: e.target.value
-	//     });
-	//   }
 
-	//   onChangeDescription(e) {
-	//     this.setState({
-	//       description: e.target.value
-	//     });
-	//   }
-
-	saveTicket() {
+	async saveTicket() {
 		var data = {
 			queue: this.state.queue,
 			description: this.state.description,
 			user: this.state.user,
 		};
 
-		TicketDataService.create(data)
-			.then((response) => {
-				this.setState({
-					id: response.data.id,
-					queue: response.data.queue,
-					description: response.data.description,
-					ticketChecked: response.data.ticketChecked,
-					user: response.data.user,
-					submitted: true,
-				});
-				console.log(response.data);
-			})
-			.catch((e) => {
-				console.log(e);
+		const ticket_save = await TicketDataService.create(data);
+        await this.n_ticket_front();
+		try {
+            this.setState({
+				id: ticket_save.data.id,
+				queue: ticket_save.data.queue,
+				description: ticket_save.data.description,
+				ticketChecked: ticket_save.data.ticketChecked,
+				user: ticket_save.data.user,
+				submitted: true,
 			});
-	}
+            console.log(ticket_save.data);
+		} catch (err) {
+			console.log(err);
+		}
 
+	}
+	async n_ticket_front(id) {
+		const n_ticket_front = await TicketDataService.get_n_ticket_front(id);
+		try {
+			this.setState({
+				n_ticket_front: n_ticket_front.data.n_ticket_front,
+			});
+			console.log(n_ticket_front.data.n_ticket_front);
+		} catch (err) {
+			console.log(err);
+		}
+	}
 	render() {
 		return (
-			<div class="container_cliente">
-				<div class="Botao">
+			<div className="container_cliente">
+				<div className="Botao">
 					<div className="submit-form">
 						{this.state.submitted ? (
 							<div>
@@ -82,6 +85,7 @@ export default class AddTicket extends Component {
 							</div>
 						) : (
 							<div>
+								<h4>Ticket Number:</h4>
 								<button
 									onClick={this.saveTicket}
 									className="btn btn-success"
@@ -92,10 +96,13 @@ export default class AddTicket extends Component {
 						)}
 					</div>
 				</div>
-				<div class="Total-de-pessoas"></div>
-				<div class="Media-atendimento"></div>
-				<div class="Tempo-de-espera"></div>
-				<div class="Extra"></div>
+				<div className="Total-de-pessoas">
+					<p>Total de pessoa na frente</p>
+					<p>{this.state.n_ticket_front}</p>
+				</div>
+				<div className="Media-atendimento"></div>
+				<div className="Tempo-de-espera"></div>
+				<div className="Extra"></div>
 			</div>
 		);
 	}
