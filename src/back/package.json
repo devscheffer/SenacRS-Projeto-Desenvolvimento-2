@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Node.js Rest Apis with Express, Sequelize & PostgreSQL",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
     "nodejs",
     "express",
@@ -22,5 +19,14 @@
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^5.21.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   }
 }

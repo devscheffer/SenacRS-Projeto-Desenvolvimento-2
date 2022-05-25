@@ -58,14 +58,14 @@
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
-      "graph1 graph2"
-      "graph3 graph4";
+      "graph1 graph1"
+      "graph3 graph3"
+      ;
   }
 
   .graph1 { grid-area: graph1; }
 
-  .graph2 { grid-area: graph2; }
-
-  .graph3 { grid-area: graph3; }
-
-  .graph4 { grid-area: graph4; }
+  .graph3 {
+      display: grid;
+    height: 100%;
+ }

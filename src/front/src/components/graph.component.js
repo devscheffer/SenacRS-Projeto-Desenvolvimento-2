@@ -2,6 +2,8 @@
 
 import React, {Component} from "react";
 import TicketDataService from "../services/ticket.service";
+import Analytics from "./Analytics";
+import Earnings from "./Earnings";
 
 export default class AddTicket extends Component {
 	constructor(props) {
@@ -66,12 +68,15 @@ export default class AddTicket extends Component {
 
 	render() {
 		return (
-			<div class="container_gerente">
-  <div class="graph1"></div>
-  <div class="graph2"></div>
-  <div class="graph3"></div>
-  <div class="graph4"></div>
-</div>
+			<div className="container_gerente">
+            <div className="graph1"><Analytics /></div>
+      <div className="graph3"><Earnings /></div>
+      <div className="graph3"><Earnings /></div>
+            </div>
 		);
 	}
 }
+
+
+
+
