@@ -69,14 +69,13 @@ export default class AddTicket extends Component {
 	render() {
 		return (
 			<div className="container_gerente">
-            <div className="graph1"><Analytics /></div>
-      <div className="graph3"><Earnings /></div>
-      <div className="graph3"><Earnings /></div>
-            </div>
+				<div className="graph1">
+					<Analytics />
+				</div>
+				<div className="graph3">
+					<Earnings />
+				</div>
+			</div>
 		);
 	}
 }
-
-
-
-
