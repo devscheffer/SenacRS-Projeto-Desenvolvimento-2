@@ -1,1 +1,15 @@
 # SenacRS-Projeto-Desenvolvimento-2
+## Setup
+Terminal 1:
+cd src/back
+npm install
+Terminal 2:
+cd src/front
+npm install
+## Run
+Terminal 1:
+cd src/back
+node server.js
+Terminal 2:
+cd src/front
+npm start
