@@ -1,5 +1,5 @@
-/** @format */
-
+/*[todo] Deploy database
+ */
 module.exports = {
 	HOST: "localhost",
 	USER: "postgres",

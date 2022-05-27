@@ -17,6 +17,10 @@ module.exports = (sequelize, Sequelize) => {
 		user: {
 			type: Sequelize.STRING,
 		},
+        ticketCreated:{
+            type: Sequelize.DATE,
+            
+        }
 	});
 
 	return Ticket;

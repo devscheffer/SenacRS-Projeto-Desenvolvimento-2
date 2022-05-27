@@ -1,0 +1,4 @@
+@base = http://localhost:8080/api/tickets
+
+POST  {{base}}/v1/cliente
+

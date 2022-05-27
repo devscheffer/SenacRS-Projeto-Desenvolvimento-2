@@ -2,16 +2,17 @@
 
 module.exports = (app) => {
 	const tickets = require("../controllers/ticket.controller.js");
+	const cliente = require("../controllers/cliente.controller.js");
+	const router = require("express").Router();
+	router.post("/v1/cliente", cliente.create_ticket);
 
-	var router = require("express").Router();
-
+    //[todo] Refatorar
 	// Create a new Ticket
 	router.post("/", tickets.create);
 	// Get n tickets in front
 	router.get("/get_n_ticket_front", tickets.get_n_ticket_front);
 	// Get avg service time
 	// router.get("/get_avg_service_time", tickets.get_avg_service_time);
-
 	// Retrieve all Tickets
 	router.get("/", tickets.findAll);
 	// Retrieve next Tickets

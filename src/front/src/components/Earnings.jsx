@@ -1,7 +1,7 @@
 /** @format */
 
 import styled from "styled-components";
-import {AreaChart, Area, Tooltip, ResponsiveContainer,XAxis, Legend,   YAxis,    CartesianGrid} from "recharts";
+import {AreaChart,Line ,LineChart, Area, Tooltip, ResponsiveContainer,XAxis, Legend,   YAxis,    CartesianGrid} from "recharts";
 import {cardStyles} from "./ReusableStyles";
 import TicketDataService from "../services/ticket.service";
 import React, {Component} from "react";
@@ -84,7 +84,7 @@ export default class Earnings extends Component {
 				</div>
 				<div className="chart">
 					<ResponsiveContainer width="100%" height="100%">
-						<AreaChart
+						<LineChart
 							width={500}
 							height={400}
 							data={this.state.data2}
@@ -133,25 +133,27 @@ export default class Earnings extends Component {
                             <Legend />
 							<CartesianGrid strokeDasharray="3 3" />
 							<Tooltip />
-							<Area
+							<Line
                             connectNulls
 								type="monotone"
 								dataKey="atendimento"
 								stroke="#8884d8"
 								fillOpacity={1}
 								fill="url(#colorUv)"
+								strokeWidth={3}
                                 dot={{ stroke: 'blue', strokeWidth: 1, r: 4,strokeDasharray:''}}
 							/>
-							<Area
+							<Line
                             connectNulls
 								type="monotone"
 								dataKey="entrada"
 								stroke="#82ca9d"
 								fillOpacity={1}
 								fill="url(#colorPv)"
+								strokeWidth={3}
                                 dot={{ stroke: 'red', strokeWidth: 1, r: 4,strokeDasharray:''}}
 							/>
-						</AreaChart>
+						</LineChart >
 						{/* <AreaChart
 							width={500}
 							height={400}
