@@ -60,6 +60,7 @@
     grid-template-areas:
       "graph1 graph1"
       "graph3 graph3"
+      "graph2 graph2"
       ;
   }
 

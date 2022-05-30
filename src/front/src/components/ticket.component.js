@@ -2,6 +2,9 @@
 
 import React, {Component} from "react";
 import TicketDataService from "../services/ticket.service";
+import styled from "styled-components";
+import {cardStyles} from "./ReusableStyles";
+import {FiActivity} from "react-icons/fi";
 
 export default class AddTicket extends Component {
 	constructor(props) {
@@ -175,23 +178,86 @@ export default class AddTicket extends Component {
 						)}
 					</div>
 				</div>
-				<div className="Total-de-pessoas">
+                <Section>                <div className="analytic ">
+					<div className="content">
 					<p>Total de pessoa na frente</p>
 					<p>{this.state.n_ticket_front}</p>
+					</div>
+					<div className="logo">
+						<FiActivity />
+					</div>
 				</div>
-				<div className="Media-atendimento">
+                <div className="analytic ">
+					<div className="content">
 					<p>Tempo médio de atendimento</p>
 					<p>{this.state.avg_service_time}</p>
+					</div>
+					<div className="logo">
+						<FiActivity />
+					</div>
 				</div>
-				<div className="Tempo-de-espera">
+                <div className="analytic ">
+					<div className="content">
 					<p>Tempo médio de espera</p>
 					<p>{this.state.avg_waiting_time}</p>
+					</div>
+					<div className="logo">
+						<FiActivity />
+					</div>
 				</div>
-				<div className="Extra">
+                <div className="analytic ">
+					<div className="content">
 					<p>Tempo estimado para ser atendido</p>
 					<p>{this.state.estimate_waiting}</p>
+					</div>
+					<div className="logo">
+						<FiActivity />
+					</div>
 				</div>
+                </Section>
 			</div>
 		);
 	}
 }
+const Section = styled.section`
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	gap: 1rem;
+	.analytic {
+		${cardStyles};
+		padding: 1rem;
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+		gap: 1rem;
+		transition: 0.5s ease-in-out;
+		&:hover {
+			background-color: #ffc107;
+			color: black;
+			svg {
+				color: white;
+			}
+		}
+		.logo {
+			background-color: black;
+			border-radius: 3rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 1.5rem;
+			svg {
+				font-size: 1.5rem;
+			}
+		}
+	}
+
+	@media screen and (min-width: 280px) and (max-width: 720px) {
+		grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+		.analytic {
+			&:nth-of-type(3),
+			&:nth-of-type(4) {
+				flex-direction: row-reverse;
+			}
+		}
+	}
+`;

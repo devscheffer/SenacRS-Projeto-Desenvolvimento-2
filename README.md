@@ -13,3 +13,10 @@ node server.js
 Terminal 2:
 cd src/front
 npm start
+
+
+## Apresentação 2022-05-27
+
+opcao de desistencia do ticket
+prioridade na documentação
+focar no BI ao inves da criacao de fila

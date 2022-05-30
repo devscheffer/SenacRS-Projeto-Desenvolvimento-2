@@ -8,6 +8,7 @@ import "./App.css";
 import Ticket from "./components/ticket.component";
 import Graph from "./components/graph.component";
 import TicketsList from "./components/tickets-list.component";
+import Tests from "./components/test.component";
 
 class App extends Component {
 	render() {
@@ -33,6 +34,11 @@ class App extends Component {
 								Gerente
 							</Link>
 						</li>
+						<li className="nav-item">
+							<Link to={"/test"} className="nav-link">
+								test
+							</Link>
+						</li>
 					</div>
 				</nav>
 
@@ -42,6 +48,7 @@ class App extends Component {
 						<Route exact path="/ticket" component={Ticket} />
 						<Route path="/tickets/:id" component={Ticket} />
 						<Route path="/graph" component={Graph} />
+						<Route path="/test" component={Tests} />
 					</Switch>
 				</div>
 			</div>
