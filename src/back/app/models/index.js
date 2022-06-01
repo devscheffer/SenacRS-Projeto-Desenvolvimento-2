@@ -17,5 +17,6 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.tickets = require("./ticket.model.js")(sequelize, Sequelize);
+db.ticket_v1 = require("./ticket.v1.model.js")(sequelize, Sequelize);
 
 module.exports = db;

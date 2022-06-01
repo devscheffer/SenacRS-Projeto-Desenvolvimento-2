@@ -1,0 +1,21 @@
+@base = http://localhost:8080/api/tickets/v1/ticket
+@id =1
+
+POST {{base}}/
+content-type: application/json
+
+{}
+
+###
+PUT {{base}}/{{id}}
+content-type: application/json
+
+{
+    "is_checked": true,
+    "checked_ts": "2022-06-01 15:00:59.039-0300"
+}
+###
+GET {{base}}/{{id}}
+content-type: application/json
+
+{}
