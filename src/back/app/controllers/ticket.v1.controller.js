@@ -4,7 +4,7 @@ const db = require("../models");
 const Ticket = db.ticket_v1;
 const Op = db.Sequelize.Op;
 
-exports.ticket_create = async (req, res) => {
+exports.create = async (req, res) => {
 	const ticket = {
 		is_checked: false,
 		created_ts: Date.now(),
@@ -20,7 +20,7 @@ exports.ticket_create = async (req, res) => {
 	}
 };
 
-exports.ticket_update = async (req, res) => {
+exports.update = async (req, res) => {
 	const id = req.params.id;
 	try {
 		let num = await Ticket.update(req.body, {
@@ -45,7 +45,7 @@ exports.ticket_update = async (req, res) => {
 	}
 };
 
-exports.ticket_id = async (req, res) => {
+exports.id = async (req, res) => {
 	const id = req.params.id;
 	const data = await Ticket.findByPk(id);
 	try {

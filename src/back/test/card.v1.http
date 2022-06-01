@@ -1,12 +1,12 @@
-@base = http://localhost:8080/api/tickets
+@base = http://localhost:8080/api/tickets/v1/card
 
-GET  {{base}}/v1/card/pending_count
+GET  {{base}}/pending_count
 content-type: application/json
 
 {}
 
 ###
-GET  {{base}}/v1/card/pending_count
+GET  {{base}}/pending_count
 content-type: application/json
 
 {
