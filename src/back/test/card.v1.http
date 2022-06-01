@@ -20,3 +20,9 @@ content-type: application/json
 {}
 
 ###
+GET  {{base}}/service_time
+content-type: application/json
+
+{}
+
+###

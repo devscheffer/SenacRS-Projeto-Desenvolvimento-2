@@ -12,6 +12,7 @@ module.exports = (app) => {
     // Card
 	router.get("/v1/card/pending_count", card.pending_count);
 	router.get("/v1/card/waiting_time", card.waiting_time);
+	router.get("/v1/card/service_time", card.service_time);
 
 	app.use("/api/tickets", router);
 };
