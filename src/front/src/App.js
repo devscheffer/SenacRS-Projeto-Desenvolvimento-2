@@ -5,38 +5,32 @@ import {Switch, Route, Link} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import Ticket from "./components/ticket.component";
-import Graph from "./components/graph.component";
-import TicketsList from "./components/tickets-list.component";
-import Tests from "./components/test.component";
-
+import Cliente from "./components/cliente.component";
+import Gerente from "./components/gerente.component";
+import Atendente from "./components/atendente.component";
+// import Test from "./components/card/test.component"
 class App extends Component {
 	render() {
 		return (
 			<div>
 				<nav className="navbar navbar-expand navbar-dark bg-dark">
-					<Link to={"/tickets"} className="navbar-brand">
+					<Link to={"/cliente"} className="navbar-brand">
 						Qfila
 					</Link>
 					<div className="navbar-nav mr-auto">
 						<li className="nav-item">
-							<Link to={"/tickets"} className="nav-link">
+							<Link to={"/atendente"} className="nav-link">
 								Atendente
 							</Link>
 						</li>
 						<li className="nav-item">
-							<Link to={"/ticket"} className="nav-link">
-								Ticket
+							<Link to={"/cliente"} className="nav-link">
+								Cliente
 							</Link>
 						</li>
 						<li className="nav-item">
-							<Link to={"/graph"} className="nav-link">
+							<Link to={"/gerente"} className="nav-link">
 								Gerente
-							</Link>
-						</li>
-						<li className="nav-item">
-							<Link to={"/test"} className="nav-link">
-								test
 							</Link>
 						</li>
 					</div>
@@ -44,11 +38,10 @@ class App extends Component {
 
 				<div className="container mt-3">
 					<Switch>
-						<Route exact path={["/", "/tickets"]} component={TicketsList}/>
-						<Route exact path="/ticket" component={Ticket} />
-						<Route path="/tickets/:id" component={Ticket} />
-						<Route path="/graph" component={Graph} />
-						<Route path="/test" component={Tests} />
+						<Route exact path={["/", "/atendente"]} component={Atendente}/>
+						<Route exact path="/cliente" component={Cliente} />
+						<Route path="/gerente" component={Gerente} />
+						{/* <Route path="/test" component={Test} /> */}
 					</Switch>
 				</div>
 			</div>

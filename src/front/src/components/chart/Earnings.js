@@ -1,9 +1,9 @@
 /** @format */
 
 import styled from "styled-components";
-import {AreaChart,Line ,LineChart, Area, Tooltip, ResponsiveContainer,XAxis, Legend,   YAxis,    CartesianGrid} from "recharts";
-import {cardStyles} from "./ReusableStyles";
-import TicketDataService from "../services/ticket.service";
+import { Line ,LineChart, Tooltip, ResponsiveContainer,XAxis, Legend,   YAxis,    CartesianGrid} from "recharts";
+import {cardStyles} from "../ReusableStyles";
+import TicketDataService from "../../services/ticket.service";
 import React, {Component} from "react";
 
 export default class Earnings extends Component {
@@ -90,44 +90,6 @@ export default class Earnings extends Component {
 							data={this.state.data2}
 							margin={{top: 10, right: 30, left: 0, bottom: 0}}
 						>
-							<defs>
-								<linearGradient
-									id="colorUv"
-									x1="0"
-									y1="0"
-									x2="0"
-									y2="1"
-								>
-									<stop
-										offset="5%"
-										stopColor="#8884d8"
-										stopOpacity={0.8}
-									/>
-									<stop
-										offset="95%"
-										stopColor="#8884d8"
-										stopOpacity={0}
-									/>
-								</linearGradient>
-								<linearGradient
-									id="colorPv"
-									x1="0"
-									y1="0"
-									x2="0"
-									y2="1"
-								>
-									<stop
-										offset="5%"
-										stopColor="#82ca9d"
-										stopOpacity={0.8}
-									/>
-									<stop
-										offset="95%"
-										stopColor="#82ca9d"
-										stopOpacity={0}
-									/>
-								</linearGradient>
-							</defs>
 							<XAxis dataKey="minuto" />
 							<YAxis />
                             <Legend />
@@ -154,23 +116,6 @@ export default class Earnings extends Component {
                                 dot={{ stroke: 'red', strokeWidth: 1, r: 4,strokeDasharray:''}}
 							/>
 						</LineChart >
-						{/* <AreaChart
-							width={500}
-							height={400}
-							data={this.state.data2}
-							margin={{top: 0, left: 0, right: 0, bottom: 0}}
-						>
-							<Tooltip cursor={false} />
-							<Area
-								animationBegin={800}
-								animationDuration={2000}
-								type="monotone"
-								dataKey="minuto"
-								stroke="#ffc107"
-								fill="#8068233e"
-								strokeWidth={4}
-							/>
-						</AreaChart> */}
 					</ResponsiveContainer>
 				</div>
 			</Section>
@@ -179,9 +124,7 @@ export default class Earnings extends Component {
 }
 
 const Section = styled.section`
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+	display: grid;
 	min-height: 20rem;
 	${cardStyles}
 	padding: 2rem 0 0 0;
@@ -213,6 +156,8 @@ const Section = styled.section`
 	}
 	.chart {
 		height: 70%;
+	min-height: 20rem;
+        
 		.recharts-default-tooltip {
 			background-color: black !important;
 			border-color: black !important;

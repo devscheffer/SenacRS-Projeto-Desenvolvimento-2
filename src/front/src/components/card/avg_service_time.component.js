@@ -2,51 +2,18 @@
 
 import styled from "styled-components";
 import {BsFillCalendar2WeekFill} from "react-icons/bs";
-import {IoStatsChart} from "react-icons/io5";
-import {BiGroup} from "react-icons/bi";
-import {FiActivity} from "react-icons/fi";
-import {cardStyles} from "./ReusableStyles";
-import TicketDataService from "../services/ticket.service";
+import {cardStyles} from "../ReusableStyles";
+import TicketDataService from "../../services/ticket.service";
 import React, {Component} from "react";
 
-export default class Analytics extends Component {
+export default class Tests extends Component {
 	constructor(props) {
 		super(props);
 		this.avg_service_time = this.avg_service_time.bind(this);
-		this.avg_waiting_time = this.avg_waiting_time.bind(this);
-		this.avg_service_time();
-		this.avg_waiting_time();
-		this.state = {
-			id: null,
-			queue: "fila1",
-			description: "",
-			ticketChecked: false,
-			user: "person1",
-			submitted: false,
+        this.state = {
+			avg_service_time: null
 		};
-	}
-    async avg_waiting_time() {
-		const res = await TicketDataService.getNotPending();
-		try {
-			let waiting_time = res.data.map((ticket) =>
-				parseInt(
-					(Math.abs(
-						Date.parse(ticket.ticketChecked_ts) -
-							Date.parse(ticket.createdAt)
-					) /
-						(1000 * 60)) %
-						60
-				)
-			);
-			const avg_waiting_time = Math.floor(
-				waiting_time.reduce((a, b) => a + b, 0) / waiting_time.length
-			);
-			this.setState({
-				avg_waiting_time: avg_waiting_time,
-			});
-		} catch (err) {
-			console.log(err);
-		}
+        this.avg_service_time();
 	}
 	async avg_service_time() {
 		const res = await TicketDataService.getNotPending();
@@ -80,39 +47,12 @@ export default class Analytics extends Component {
 		return (
 			<Section>
 				<div className="analytic ">
-					<div className="content">
-						<h5>Total de pessoas atendidas</h5>
-						<h2>{this.state.avg_service_time}</h2>
-					</div>
 					<div className="logo">
 						<BsFillCalendar2WeekFill />
 					</div>
-				</div>
-				<div className="analytic">
-					<div className="logo">
-						<IoStatsChart />
-					</div>
 					<div className="content">
-						<h5>Tempo de espera</h5>
-						<h2>{this.state.avg_waiting_time}</h2>
-					</div>
-				</div>
-				<div className="analytic">
-					<div className="logo">
-						<BiGroup />
-					</div>
-					<div className="content">
-						<h5>Tempo de atendimento médio</h5>
-						<h2>10</h2>
-					</div>
-				</div>
-				<div className="analytic ">
-					<div className="content">
-						<h5>Desvio padrão do tempo de atendimento</h5>
-						<h2>5</h2>
-					</div>
-					<div className="logo">
-						<FiActivity />
+						<h5>Duração do atendimento (média)</h5>
+						<h2>{this.state.avg_service_time}</h2>
 					</div>
 				</div>
 			</Section>
@@ -122,7 +62,7 @@ export default class Analytics extends Component {
 
 const Section = styled.section`
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(1, 1fr);
 	gap: 1rem;
 	.analytic {
 		${cardStyles};
