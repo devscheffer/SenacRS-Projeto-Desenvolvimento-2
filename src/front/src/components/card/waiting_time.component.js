@@ -1,40 +1,25 @@
 /** @format */
 
 import styled from "styled-components";
-import {BsFillCalendar2WeekFill} from "react-icons/bs";
 import {cardStyles} from "../ReusableStyles";
-import TicketDataService from "../../services/ticket.service";
+import TicketDataService from "../../services/card.service";
 import React, {Component} from "react";
 
 export default class Tests extends Component {
 	constructor(props) {
 		super(props);
-		this.avg_waiting_time = this.avg_waiting_time.bind(this);
+		this.waiting_time = this.waiting_time.bind(this);
 		this.state = {
-			avg_waiting_time: null,
+			waiting_time: {avg:0},
 		};
-		this.avg_waiting_time();
+		this.waiting_time();
 	}
-	async avg_waiting_time() {
-		const res = await TicketDataService.getNotPending();
-		try {
-			let waiting_time = res.data.map((ticket) =>
-				parseInt(
-					(Math.abs(
-						Date.parse(ticket.ticketChecked_ts) -
-							Date.parse(ticket.ticketCreated)
-					) /
-						(1000 * 60)) %
-						60
-				)
-			);
-			const avg_waiting_time = Math.floor(
-				waiting_time.filter((x) => x).reduce((a, b) => a + b) /
-					waiting_time.length
-			);
-			console.log(avg_waiting_time);
+	async waiting_time() {
+        try {
+            const res = await TicketDataService.get_waiting_time();
+			let waiting_time_avg = Math.round(res.data.waiting_time.avg,0)
 			this.setState({
-				avg_waiting_time: avg_waiting_time,
+				waiting_time:{avg: waiting_time_avg},
 			});
 		} catch (err) {
 			console.log(err);
@@ -42,17 +27,16 @@ export default class Tests extends Component {
 	}
 	render() {
 		return (
-			<Section>
-				<div className="analytic ">
-					<div className="logo">
-						<BsFillCalendar2WeekFill />
-					</div>
-					<div className="content">
-						<h5>Tempo de espera (média)</h5>
-						<h2>{this.state.avg_waiting_time}</h2>
-					</div>
-				</div>
-			</Section>
+			 <Section>
+				<div className="analytic">
+                    <div className="content">
+                        <div>
+                            <h5>Tempo de espera (min)</h5>
+                            <h2>{this.state.waiting_time.avg}</h2>
+                        </div>
+                    </div>
+                </div>
+			  </Section>
 		);
 	}
 }

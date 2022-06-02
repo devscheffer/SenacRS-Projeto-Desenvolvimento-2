@@ -3,7 +3,7 @@
 import React, {Component} from "react";
 import Earnings from "./chart/Earnings";
 import Card1 from "./card/avg_service_time.component"
-import Card2 from "./card/avg_waiting_time.component"
+import Card2 from "./card/waiting_time.component"
 import Card3 from "./card/estimate_waiting.component"
 import Card4 from "./card/n_ticket_front.component"
 
