@@ -1,44 +1,26 @@
 /** @format */
 
 import styled from "styled-components";
-import {BsFillCalendar2WeekFill} from "react-icons/bs";
 import {cardStyles} from "../ReusableStyles";
-import TicketDataService from "../../services/ticket.service";
+import CardDataService from "../../services/card.service";
 import React, {Component} from "react";
 
 export default class Tests extends Component {
 	constructor(props) {
 		super(props);
-		this.avg_service_time = this.avg_service_time.bind(this);
-        this.state = {
-			avg_service_time: null
+		this.pending_count = this.pending_count.bind(this);
+		this.state = {
+            id:null,
+			pending_count: null,
 		};
-        this.avg_service_time();
+		this.pending_count(this.state.id);
 	}
-	async avg_service_time() {
-		const res = await TicketDataService.getNotPending();
-		try {
-			let data = res.data.sort((a, b) => a.id - b.id);
-			let service_time = data.map((ticket) =>
-				parseInt(Date.parse(ticket.ticketChecked_ts))
-			);
-			let service_time_arr = [];
-			for (let j = 0; j < service_time.length - 1; j++) {
-				let waiting = parseInt(
-					(Math.abs(service_time[j + 1] - service_time[j]) /
-						(1000 * 60)) %
-						60
-				);
-				service_time_arr.push(waiting);
-			}
-			const service_time_avg = Math.floor(
-				service_time_arr.reduce((a, b) => a + b, 0) /
-					service_time_arr.length
-			);
+	async pending_count(id) {
+        try {
+            const res = await CardDataService.get_pending_count(id);
 			this.setState({
-				avg_service_time: service_time_avg,
+				pending_count: res.data.total_user,
 			});
-			return service_time_avg;
 		} catch (err) {
 			console.log(err);
 		}
@@ -47,12 +29,9 @@ export default class Tests extends Component {
 		return (
 			<Section>
 				<div className="analytic ">
-					<div className="logo">
-						<BsFillCalendar2WeekFill />
-					</div>
 					<div className="content">
-						<h5>Duração do atendimento (média)</h5>
-						<h2>{this.state.avg_service_time}</h2>
+						<h5>Total de pessoas esperando</h5>
+						<h2>{this.state.pending_count}</h2>
 					</div>
 				</div>
 			</Section>

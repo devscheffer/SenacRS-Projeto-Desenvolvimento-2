@@ -13,10 +13,24 @@ exports.pending_count = async (req, res) => {
 	try {
 		let total_user = query.length;
 		res.send({total_user: total_user});
-	} catch (e) {
+	} catch (err) {
 		res.sendStatus(500).send({
 			message:
-				e.message || "Some error occurred while retrieving tickets.",
+				err.message || "Some error occurred while retrieving tickets.",
+		});
+	}
+};
+exports.not_pending_count = async (req, res) => {
+	const query = await Ticket.findAll({
+		where: {[Op.and]: [{is_checked: true}]},
+	});
+	try {
+		let total_user = query.length;
+		res.send({total_user: total_user});
+	} catch (err) {
+		res.sendStatus(500).send({
+			message:
+				err.message || "Some error occurred while retrieving tickets.",
 		});
 	}
 };
@@ -31,10 +45,10 @@ exports.waiting_time = async (req, res) => {
 	try {
 		let waiting_time = query.map((item) => parseFloat(item.waiting_time));
 		res.send({waiting_time: stats(waiting_time)});
-	} catch (e) {
+	} catch (err) {
 		res.sendStatus(500).send({
 			message:
-				e.message || "Some error occurred while retrieving tickets.",
+				err.message || "Some error occurred while retrieving tickets.",
 		});
 	}
 };
@@ -58,10 +72,10 @@ exports.service_time = async (req, res) => {
 	try {
 		let service_time = query.map((item) => parseFloat(item.service_time));
 		res.send({service_time: stats(service_time)});
-	} catch (e) {
+	} catch (err) {
 		res.sendStatus(500).send({
 			message:
-				e.message || "Some error occurred while retrieving tickets.",
+				err.message || "Some error occurred while retrieving tickets.",
 		});
 	}
 };

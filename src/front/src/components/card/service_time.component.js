@@ -1,41 +1,38 @@
 /** @format */
 
 import styled from "styled-components";
-import {BsFillCalendar2WeekFill} from "react-icons/bs";
 import {cardStyles} from "../ReusableStyles";
-import TicketDataService from "../../services/ticket.service";
+import CardDataService from "../../services/card.service";
 import React, {Component} from "react";
 
 export default class Tests extends Component {
 	constructor(props) {
 		super(props);
-		this.CountPending = this.CountPending.bind(this);
-		this.state = {
-			tickets_pending: null,
+		this.service_time = this.service_time.bind(this);
+        this.state = {
+			service_time: {avg:0}
 		};
-		this.CountPending();
+        this.service_time();
 	}
-	async CountPending() {
-		const response = await TicketDataService.getCountPending();
-		try {
+	async service_time() {
+        try {
+            const res = await CardDataService.get_service_time();
+            let service_time_avg = Math.round(res.data.service_time.avg,0)
+
 			this.setState({
-				tickets_pending: response.data.total,
+				service_time: {avg:service_time_avg},
 			});
-			console.log(response.data);
-		} catch (e) {
-			console.log(e);
+		} catch (err) {
+			console.log(err);
 		}
 	}
 	render() {
 		return (
 			<Section>
 				<div className="analytic ">
-					<div className="logo">
-						<BsFillCalendar2WeekFill />
-					</div>
 					<div className="content">
-						<h5>Total pending tickets</h5>
-						<h2>{this.state.tickets_pending}</h2>
+						<h5>Duração do atendimento (min)</h5>
+						<h2>{this.state.service_time.avg}</h2>
 					</div>
 				</div>
 			</Section>

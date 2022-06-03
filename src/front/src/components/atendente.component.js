@@ -1,7 +1,7 @@
 /** @format */
 
 import React, {Component} from "react";
-import TicketsPending from "./card/tickets_pending.component";
+import TicketsPending from "./card/pending.component";
 import TicketInfo from "./card/ticket_info.component";
 import CallTicket from "./button/call_ticket.component";
 import ListTicket from "./list/ticket_pending.component.js";

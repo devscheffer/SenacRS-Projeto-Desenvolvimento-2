@@ -1,10 +1,10 @@
 /** @format */
 
 import React, {Component} from "react";
-import Card1 from "./card/avg_service_time.component";
-import Card2 from "./card/waiting_time.component";
+import CardServiceTime from "./card/service_time.component";
+import CardWaitingTime from "./card/waiting_time.component";
 import Card3 from "./card/estimate_waiting.component";
-import Card4 from "./card/n_ticket_front.component";
+import PendingId from "./card/pending_id.component";
 import Button from "./button/create_ticket.component";
 export default class AddTicket extends Component {
 	constructor(props) {
@@ -28,16 +28,16 @@ export default class AddTicket extends Component {
 					<Button />
 				</div>
 				<div className="card1">
-					<Card1 />
+					<CardServiceTime />
 				</div>
 				<div className="card2">
-					<Card2 />
+					<CardWaitingTime />
 				</div>
 				<div className="card3">
 					<Card3 />
 				</div>
 				<div className="card4">
-					<Card4 />
+					<PendingId />
 				</div>
 			</div>
 		);

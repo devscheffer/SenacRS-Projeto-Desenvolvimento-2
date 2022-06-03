@@ -8,18 +8,18 @@ import React, {Component} from "react";
 export default class Tests extends Component {
 	constructor(props) {
 		super(props);
-		this.waiting_time = this.waiting_time.bind(this);
+		this.pending_count = this.pending_count.bind(this);
 		this.state = {
-			waiting_time: {avg:0},
+            id:null,
+			pending_count: 0,
 		};
-		this.waiting_time();
+		this.pending_count(this.state.id);
 	}
-	async waiting_time() {
+	async pending_count(id) {
         try {
-            const res = await CardDataService.get_waiting_time();
-			let waiting_time_avg = Math.round(res.data.waiting_time.avg,0)
+            const res = await CardDataService.get_pending_count(id);
 			this.setState({
-				waiting_time:{avg: waiting_time_avg},
+				pending_count: res.data.total_user,
 			});
 		} catch (err) {
 			console.log(err);
@@ -27,16 +27,14 @@ export default class Tests extends Component {
 	}
 	render() {
 		return (
-			 <Section>
-				<div className="analytic">
-                    <div className="content">
-                        <div>
-                            <h5>Tempo de espera (min)</h5>
-                            <h2>{this.state.waiting_time.avg}</h2>
-                        </div>
-                    </div>
-                </div>
-			  </Section>
+			<Section>
+				<div className="analytic ">
+					<div className="content">
+						<h5>Total de pessoas antes de você</h5>
+						<h2>{this.state.pending_count}</h2>
+					</div>
+				</div>
+			</Section>
 		);
 	}
 }

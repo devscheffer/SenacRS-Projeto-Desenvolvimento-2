@@ -8,7 +8,9 @@ import "./App.css";
 import Cliente from "./components/cliente.component";
 import Gerente from "./components/gerente.component";
 import Atendente from "./components/atendente.component";
-import Waiting_time from "./components/card/waiting_time.component"
+import WaitingTime from "./components/card/waiting_time.component"
+import ServiceTime from "./components/card/service_time.component"
+import Pending from "./components/card/pending.component"
 class App extends Component {
 	render() {
 		return (
@@ -41,10 +43,9 @@ class App extends Component {
 						<Route exact path={["/", "/atendente"]} component={Atendente}/>
 						<Route exact path="/cliente" component={Cliente} />
 						<Route path="/gerente" component={Gerente} />
-						<Route path="/card/waiting_time" component={Waiting_time} />
-						<Route path="/card/waiting_time" component={Waiting_time} />
-						<Route path="/card/waiting_time" component={Waiting_time} />
-						<Route path="/card/waiting_time" component={Waiting_time} />
+						<Route path="/card/waiting_time" component={WaitingTime} />
+						<Route path="/card/service_time" component={ServiceTime} />
+						<Route path="/card/pending" component={Pending} />
 					</Switch>
 				</div>
 			</div>
