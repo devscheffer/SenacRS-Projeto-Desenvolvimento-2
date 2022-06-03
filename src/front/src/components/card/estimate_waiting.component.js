@@ -1,68 +1,28 @@
 /** @format */
 
 import styled from "styled-components";
-import {BsFillCalendar2WeekFill} from "react-icons/bs";
 import {cardStyles} from "../ReusableStyles";
 import React, {Component} from "react";
-import TicketDataService from "../../services/ticket.service";
+import CardDataService from "../../services/card.service";
 
 export default class Tests extends Component {
 	constructor(props) {
 		super(props);
 		this.estimate_waiting = this.estimate_waiting.bind(this);
 		this.state = {
-            id:null,
+			id: null,
 			estimate_waiting: null,
 		};
 		this.estimate_waiting();
 	}
 
-    async avg_service_time() {
-		const res = await TicketDataService.getNotPending();
+	async estimate_waiting(id) {
+		let service_time = await CardDataService.get_service_time()
+        let service_time_data= service_time.data.service_time.avg;
+		let n_people = await CardDataService.get_pending_count(id)
+        let n_people_data=n_people.data.total_user;
 		try {
-			let data = res.data.sort((a, b) => a.id - b.id);
-			let service_time = data.map((ticket) =>
-				parseInt(Date.parse(ticket.ticketChecked_ts))
-			);
-			let service_time_arr = [];
-			for (let j = 0; j < service_time.length - 1; j++) {
-				let waiting = parseInt(
-					(Math.abs(service_time[j + 1] - service_time[j]) /
-						(1000 * 60)) %
-						60
-				);
-				service_time_arr.push(waiting);
-			}
-			const service_time_avg = Math.floor(
-				service_time_arr.reduce((a, b) => a + b, 0) /
-					service_time_arr.length
-			);
-			this.setState({
-				avg_service_time: service_time_avg,
-			});
-			return service_time_avg;
-		} catch (err) {
-			console.log(err);
-		}
-	}
-	async n_ticket_front(id) {
-		const n_ticket_front = await TicketDataService.get_n_ticket_front(id);
-		try {
-			let res = n_ticket_front.data.n_ticket_front;
-			this.setState({
-				n_ticket_front: res,
-			});
-			console.log(res);
-			return res;
-		} catch (err) {
-			console.log(err);
-		}
-	}
-    	async estimate_waiting(id) {
-		let service_time = await this.avg_service_time();
-		let n_people = await this.n_ticket_front(id);
-		try {
-			let estimate_waiting = service_time * n_people;
+			let estimate_waiting = parseInt(service_time_data * n_people_data);
 			this.setState({
 				estimate_waiting: estimate_waiting,
 			});
@@ -75,11 +35,8 @@ export default class Tests extends Component {
 		return (
 			<Section>
 				<div className="analytic ">
-					<div className="logo">
-						<BsFillCalendar2WeekFill />
-					</div>
 					<div className="content">
-						<h5>Tempo estimado para atendimento</h5>
+						<h5>Tempo estimado para o atendimento</h5>
 						<h2>{this.state.estimate_waiting}</h2>
 					</div>
 				</div>

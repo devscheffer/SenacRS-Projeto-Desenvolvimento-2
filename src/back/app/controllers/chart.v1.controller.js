@@ -120,7 +120,7 @@ exports.chart3 = async (req, res) => {
             SELECT checked_ts,
                 extract(
                     HOUR
-                    FROM checked_ts
+                    FROM created_ts
                 ) AS time_id,
                 dense_rank () over(
                     ORDER BY id

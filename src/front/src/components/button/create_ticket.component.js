@@ -1,9 +1,9 @@
 /** @format */
 
 import styled from "styled-components";
-import {BsFillCalendar2WeekFill} from "react-icons/bs";
+import { HiOutlineTicket } from "react-icons/hi";
 import {cardStyles} from "../ReusableStyles";
-import TicketDataService from "../../services/ticket.service";
+import ButtonDataService from "../../services/button.service";
 import React, {Component} from "react";
 
 export default class Tests extends Component {
@@ -40,7 +40,7 @@ export default class Tests extends Component {
 			user: this.state.user,
 		};
 
-		const ticket_save = await TicketDataService.create(data);
+		const ticket_save = await ButtonDataService.ticket_create(data);
 
 		try {
 			this.setState({
@@ -62,7 +62,7 @@ export default class Tests extends Component {
 			<Section>
 				<div className="analytic ">
 					<div className="logo">
-						<BsFillCalendar2WeekFill />
+						<HiOutlineTicket />
 					</div>
 						<div className="submit-form">
 							{this.state.submitted ? (
