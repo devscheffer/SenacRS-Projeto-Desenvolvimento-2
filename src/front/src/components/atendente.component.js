@@ -1,4 +1,5 @@
 /** @format */
+import styled from "styled-components";
 
 import React, {Component} from "react";
 import TicketsPending from "./card/pending.component";
@@ -20,6 +21,8 @@ export default class TicketsList extends Component {
 
 	render() {
 		return (
+            <Section>
+
 			<div className="container_atendente">
 				<div className="card">
 					<TicketsPending />
@@ -34,6 +37,40 @@ export default class TicketsList extends Component {
 					<TicketInfo />
 				</div>
 			</div>
+            </Section>
 		);
 	}
 }
+
+const Section = styled.section`
+.container_atendente {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 3fr;
+	grid-auto-columns: 1fr;
+	gap: 0px 0px;
+	grid-auto-flow: row;
+	grid-template-areas:
+		"botao lista"
+		"card lista"
+		"description lista";
+}
+
+
+.botao {
+	grid-area: botao;
+}
+.card {
+	grid-area: card;
+}
+.description {
+	grid-area: description;
+}
+.lista {
+	grid-area: lista;
+}
+
+.description {
+	grid-area: description;
+}
+`;

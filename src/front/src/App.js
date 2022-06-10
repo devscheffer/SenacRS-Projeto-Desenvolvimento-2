@@ -11,6 +11,8 @@ import Atendente from "./components/atendente.component";
 import WaitingTime from "./components/card/waiting_time.component"
 import ServiceTime from "./components/card/service_time.component"
 import Pending from "./components/card/pending.component"
+import TicketPending from "./components/list/ticket_pending.component"
+import Call from "./components/button/call_ticket.component"
 class App extends Component {
 	render() {
 		return (
@@ -38,7 +40,7 @@ class App extends Component {
 					</div>
 				</nav>
 
-				<div className="container mt-3">
+				<div className="">
 					<Switch>
 						<Route exact path={["/", "/atendente"]} component={Atendente}/>
 						<Route exact path="/cliente" component={Cliente} />
@@ -46,6 +48,8 @@ class App extends Component {
 						<Route path="/card/waiting_time" component={WaitingTime} />
 						<Route path="/card/service_time" component={ServiceTime} />
 						<Route path="/card/pending" component={Pending} />
+						<Route path="/list/ticket_pending" component={TicketPending} />
+						<Route path="/button/call" component={Call} />
 					</Switch>
 				</div>
 			</div>

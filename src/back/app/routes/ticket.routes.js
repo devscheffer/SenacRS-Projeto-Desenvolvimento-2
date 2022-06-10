@@ -4,6 +4,7 @@ module.exports = (app) => {
 	const ticket = require("../controllers/ticket.v1.controller.js");
 	const card = require("../controllers/card.v1.controller.js");
 	const chart = require("../controllers/chart.v1.controller.js");
+	const list = require("../controllers/list.v1.controller.js");
 	const router = require("express").Router();
 
     // Ticket
@@ -19,6 +20,8 @@ module.exports = (app) => {
 	router.get("/v1/chart/chart1", chart.chart1);
 	router.get("/v1/chart/chart2", chart.chart2);
 	router.get("/v1/chart/chart3", chart.chart3);
+    // List
+	router.get("/v1/list/pending", list.pending);
 
 	app.use("/api/tickets", router);
 };

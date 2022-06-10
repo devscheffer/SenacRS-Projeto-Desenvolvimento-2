@@ -1,9 +1,8 @@
 /** @format */
 
 import styled from "styled-components";
-import {BsFillCalendar2WeekFill} from "react-icons/bs";
 import {cardStyles} from "../ReusableStyles";
-import TicketDataService from "../../services/ticket.service";
+import ListDataService from "../../services/list.service";
 import React, {Component} from "react";
 
 export default class Tests extends Component {
@@ -29,13 +28,11 @@ export default class Tests extends Component {
 		});
 	}
 	async retrieveTickets() {
-		const response = await TicketDataService.getPending();
 		try {
+			const response = await ListDataService.get_pending();
 			this.setState({
-				tickets: response.data,
+				tickets: response.data.pending,
 			});
-			console.log("teste");
-			console.log(response.data);
 		} catch (e) {
 			console.log(e);
 		}
@@ -44,13 +41,10 @@ export default class Tests extends Component {
 		return (
 			<Section>
 				<div className="analytic ">
-					<div className="logo">
-						<BsFillCalendar2WeekFill />
-					</div>
 					<div className="content">
 						<div className="lista">
 							<div className="list row">
-								<div className="col-md-6">
+								<div>
 									<h4>Tickets List</h4>
 									<ul className="list-group color:black">
 										{this.state.tickets &&
@@ -92,40 +86,21 @@ const Section = styled.section`
 	display: grid;
 	grid-template-columns: repeat(1, 1fr);
 	gap: 1rem;
+    li{
+        background-color: #1400ff;
+    }
 	.analytic {
 		${cardStyles};
 		padding: 1rem;
-		display: flex;
+		display: grid;
 		justify-content: space-evenly;
 		align-items: center;
 		gap: 1rem;
 		transition: 0.5s ease-in-out;
 		&:hover {
-			background-color: #ffc107;
-			color: black;
+			color: white;
 			svg {
 				color: white;
-			}
-		}
-		.logo {
-			background-color: black;
-			border-radius: 3rem;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			padding: 1.5rem;
-			svg {
-				font-size: 1.5rem;
-			}
-		}
-	}
-
-	@media screen and (min-width: 280px) and (max-width: 720px) {
-		grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-		.analytic {
-			&:nth-of-type(3),
-			&:nth-of-type(4) {
-				flex-direction: row-reverse;
 			}
 		}
 	}

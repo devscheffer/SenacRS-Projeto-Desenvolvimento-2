@@ -28,7 +28,6 @@
 
 .botao {
 	grid-area: botao;
-	display: flex;
 	align-items: center;
 	justify-content: center;
 }
@@ -46,35 +45,7 @@
 	grid-area: card4;
 }
 
-.container_atendente {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 3fr;
-	grid-auto-columns: 1fr;
-	gap: 0px 0px;
-	grid-auto-flow: row;
-	grid-template-areas:
-		"botao lista"
-		"card lista"
-		"description lista";
-}
 
-.botao {
-	grid-area: botao;
-}
-.card {
-	grid-area: card;
-}
-.description {
-	grid-area: description;
-}
-.lista {
-	grid-area: lista;
-}
-
-.description {
-	grid-area: description;
-}
 .container_gerente {
 	display: grid;
 	grid-template-columns: 1fr 1fr;

@@ -101,7 +101,6 @@ const Section = styled.section`
 	.analytic {
 		${cardStyles};
 		padding: 1rem;
-		display: flex;
 		justify-content: space-evenly;
 		align-items: center;
 		gap: 1rem;

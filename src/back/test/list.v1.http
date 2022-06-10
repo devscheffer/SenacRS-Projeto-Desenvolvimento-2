@@ -1,0 +1,9 @@
+@base = http://localhost:8080/api/tickets/v1/list
+
+
+###
+GET {{base}}/pending
+content-type: application/json
+
+{}
+###

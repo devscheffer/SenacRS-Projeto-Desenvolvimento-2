@@ -20,3 +20,13 @@ npm start
 opcao de desistencia do ticket
 prioridade na documentação
 focar no BI ao inves da criacao de fila
+## Mentoria 1
+
+Atendente
+colocar card sobre o ticket atual que esta sendo atendido
+limitar a quantidade de pessoas na lista de ticket
+mostrar tempo de espera no atendente
+colocar o horario de geracao do ticket na ticket list
+graficos com serie unica colocar como barras
+
+
