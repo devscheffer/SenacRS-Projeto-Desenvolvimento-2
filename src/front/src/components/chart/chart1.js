@@ -21,7 +21,7 @@ export default class Earnings extends Component {
 		super(props);
 		this.chart1 = this.chart1.bind(this);
 		this.pending_count = this.pending_count.bind(this);
-		this.not_pending_count = this.not_pending_count.bind(this);
+
 
 		this.state = {
 			id: null,
@@ -31,12 +31,12 @@ export default class Earnings extends Component {
 			user: "person1",
 			submitted: false,
 			pending_count: null,
-			not_pending_count: null,
+
 			chart_data: {},
 		};
 		this.chart1();
 		this.pending_count();
-		this.not_pending_count();
+
 	}
 
 	async chart1() {
@@ -50,7 +50,7 @@ export default class Earnings extends Component {
 		} catch (err) {
 			console.log(err);
 		}
-	} 
+	}
 	async pending_count(id) {
 		try {
 			const res = await CardDataService.get_pending_count(id);
@@ -61,31 +61,10 @@ export default class Earnings extends Component {
 			console.log(err);
 		}
 	}
-	async not_pending_count() {
-		try {
-			const res = await CardDataService.get_not_pending_count();
-			this.setState({
-				not_pending_count: res.data.total_user,
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	}
+
 	render() {
 		return (
 			<Section>
-				<div className="top">
-					<div className="info">
-						<h5>Pessoas atendidas</h5>
-						<h1>{this.state.not_pending_count}</h1>
-						<div className="growth">
-							<span>
-								+{this.state.pending_count} aguardando
-								atendimento
-							</span>
-						</div>
-					</div>
-				</div>
 				<div className="chart">
 					<ResponsiveContainer width="100%" height="100%">
 						<LineChart
@@ -139,6 +118,9 @@ export default class Earnings extends Component {
 
 const Section = styled.section`
 	display: grid;
+    margin: 2em;
+	gap: 20px;
+	grid-template-columns: minmax(200px, 1fr);
 	min-height: 20rem;
 	${cardStyles}
 	padding: 2rem 0 0 0;

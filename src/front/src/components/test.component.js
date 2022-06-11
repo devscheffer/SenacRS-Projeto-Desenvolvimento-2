@@ -1,88 +1,71 @@
 /** @format */
-
 import styled from "styled-components";
-import {cardStyles} from "../ReusableStyles";
-import ListDataService from "../../services/list.service";
-import CardDataService from "../../services/card.service";
 import React, {Component} from "react";
-import moment from "moment";
-export default class Tests extends Component {
+import {FaRocket} from "react-icons/fa";
+
+export default class TicketsList extends Component {
 	constructor(props) {
 		super(props);
-		this.retrieveTickets = this.retrieveTickets.bind(this);
-		this.setActiveTicket = this.setActiveTicket.bind(this);
-		this.pending_count = this.pending_count.bind(this);
 		this.state = {
 			tickets: [],
 			currentTicket: null,
 			currentIndex: -1,
-			searchTitle: "",
 			id: "",
-			pending_count: null,
+			total_tickets: null,
 		};
-		this.retrieveTickets();
-		this.pending_count(this.state.id);
 	}
 
-	setActiveTicket(ticket, index, id) {
-		this.setState({
-			currentTicket: ticket,
-			currentIndex: index,
-			id: id,
-		});
-	}
-	async retrieveTickets() {
-		try {
-			const response = await ListDataService.get_pending();
-			const data = response.data.pending;
-			console.log(data);
-			this.setState({
-				tickets: data,
-			});
-		} catch (e) {
-			console.log(e);
-		}
-	}
-    async pending_count(id) {
-        try {
-            const res = await CardDataService.get_pending_count(id);
-			this.setState({
-				pending_count: res.data.total_user,
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	}
 	render() {
 		return (
 			<Section>
-				<article className="leaderboard">
+				<article class="leaderboard">
 					<header>
-						<h1 className="leaderboard__title">
-							<span className="leaderboard__title--top">
-								Tickets: {this.state.pending_count}
-							</span>
-							<span className="leaderboard__title--bottom">
-								Lista de espera
+						<h1 class="leaderboard__title">
+							<span class="leaderboard__title--top">Forbes</span>
+							<span class="leaderboard__title--bottom">
+								Leaderboard
 							</span>
 						</h1>
 					</header>
 
-					<main className="leaderboard__profiles">
-						{this.state.tickets.map((ticket, index) => (
-							<article className="leaderboard__profile">
-								<h1>{ticket.id}</h1>
-								<span className="leaderboard__name">
-									{moment(ticket.created_ts).format(
-										"YYYY-MM-DD hh:mm"
-									)}
-								</span>
-								<span className="leaderboard__value">
-									{ticket.time_wait}
-									<span>min</span>
-								</span>
-							</article>
-						))}
+					<main class="leaderboard__profiles">
+						<article class="leaderboard__profile">
+							<h1>1</h1>
+							<span class="leaderboard__name">
+								Mark Zuckerberg
+							</span>
+							<span class="leaderboard__value">
+								35.7<span>B</span>
+							</span>
+						</article>
+
+						<article class="leaderboard__profile">
+							<h1>1</h1>
+							<span class="leaderboard__name">
+								Dustin Moskovitz
+							</span>
+							<span class="leaderboard__value">
+								9.9<span>B</span>
+							</span>
+						</article>
+
+						<article class="leaderboard__profile">
+							<h1>1</h1>
+							<span class="leaderboard__name">
+								Elizabeth Holmes
+							</span>
+							<span class="leaderboard__value">
+								4.5<span>B</span>
+							</span>
+						</article>
+
+						<article class="leaderboard__profile">
+							<h1>1</h1>
+							<span class="leaderboard__name">Evan Spiegel</span>
+							<span class="leaderboard__value">
+								2.1<span>B</span>
+							</span>
+						</article>
 					</main>
 				</article>
 			</Section>
@@ -92,12 +75,9 @@ export default class Tests extends Component {
 
 const Section = styled.section`
 	.leaderboard {
+		max-width: 490px;
+		width: 100%;
 		border-radius: 12px;
-        display: grid;
-        margin: 2em;
-        gap: 20px;
-        grid-template-columns: minmax(200px, 1fr);
-        background: #1F2124;
 
 		header {
 			--start: 15%;
@@ -156,8 +136,7 @@ const Section = styled.section`
 		}
 
 		&__profiles {
-            background: #1F2124;
-
+			background-color: #fff;
 			border-radius: 0 0 12px 12px;
 			padding: 15px 15px 20px;
 			display: grid;
@@ -176,6 +155,11 @@ const Section = styled.section`
 			transition: transform 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98),
 				box-shadow 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98);
 			background-color: #fff;
+
+			&:hover {
+				transform: scale(1.2);
+				box-shadow: 0 9px 47px 11px rgba(51, 51, 51, 0.18);
+			}
 		}
 
 		&__picture {

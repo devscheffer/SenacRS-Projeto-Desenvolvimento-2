@@ -3,25 +3,25 @@
 import styled from "styled-components";
 import {cardStyles} from "../ReusableStyles";
 import ListDataService from "../../services/list.service";
-import CardDataService from "../../services/card.service";
 import React, {Component} from "react";
 import moment from "moment";
+import Stat1 from "../stat/service_time.component"
+import Stat2 from "../stat/waiting_time.component"
+import Stat3 from "../stat/not_pending.component"
+import Stat4 from "../stat/pending.component"
 export default class Tests extends Component {
 	constructor(props) {
 		super(props);
 		this.retrieveTickets = this.retrieveTickets.bind(this);
 		this.setActiveTicket = this.setActiveTicket.bind(this);
-		this.pending_count = this.pending_count.bind(this);
 		this.state = {
 			tickets: [],
 			currentTicket: null,
 			currentIndex: -1,
 			searchTitle: "",
 			id: "",
-			pending_count: null,
 		};
 		this.retrieveTickets();
-		this.pending_count(this.state.id);
 	}
 
 	setActiveTicket(ticket, index, id) {
@@ -43,16 +43,6 @@ export default class Tests extends Component {
 			console.log(e);
 		}
 	}
-    async pending_count(id) {
-        try {
-            const res = await CardDataService.get_pending_count(id);
-			this.setState({
-				pending_count: res.data.total_user,
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	}
 	render() {
 		return (
 			<Section>
@@ -60,29 +50,18 @@ export default class Tests extends Component {
 					<header>
 						<h1 className="leaderboard__title">
 							<span className="leaderboard__title--top">
-								Tickets: {this.state.pending_count}
+								Tickets
 							</span>
 							<span className="leaderboard__title--bottom">
-								Lista de espera
+								Estatísticas Gerais
 							</span>
 						</h1>
 					</header>
-
 					<main className="leaderboard__profiles">
-						{this.state.tickets.map((ticket, index) => (
-							<article className="leaderboard__profile">
-								<h1>{ticket.id}</h1>
-								<span className="leaderboard__name">
-									{moment(ticket.created_ts).format(
-										"YYYY-MM-DD hh:mm"
-									)}
-								</span>
-								<span className="leaderboard__value">
-									{ticket.time_wait}
-									<span>min</span>
-								</span>
-							</article>
-						))}
+                        <Stat1 />
+                        <Stat2 />
+                        <Stat3 />
+                        <Stat4 />
 					</main>
 				</article>
 			</Section>

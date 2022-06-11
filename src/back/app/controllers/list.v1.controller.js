@@ -5,10 +5,22 @@ const Ticket = db.ticket_v1;
 const Op = db.Sequelize.Op;
 
 exports.pending = async (req, res) => {
-	const query = await Ticket.findAll({
-		where: {is_checked: false},
-        limit: 5
-	});
+	const [query, metadata] = await db.sequelize.query(
+		`
+        SELECT
+            id,
+            created_ts,
+            cast(
+                extract (
+                    EPOCH
+                    FROM (current_date - created_ts)
+                ) / 60 AS int
+            ) as time_wait
+        FROM tickets
+        WHERE is_checked = false
+        LIMIT 5;
+		`
+    )
 	try {
 		res.send({pending: query});
 	} catch (err) {

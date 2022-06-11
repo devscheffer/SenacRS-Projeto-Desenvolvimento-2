@@ -34,12 +34,17 @@ export default class Tests extends Component {
 	render() {
 		return (
 			<Section>
-				<div className="analytic ">
-					<div className="content">
-						<h5>Tempo estimado para o atendimento</h5>
-						<h2>{this.state.estimate_waiting}</h2>
-					</div>
-				</div>
+                <article className="leaderboard__profile">
+					<h1>1</h1>
+					<span className="leaderboard__name">
+                    Tempo estimado para o atendimento
+					</span>
+					<span className="leaderboard__value">
+						{this.state.estimate_waiting}
+						<span>min</span>
+					</span>
+				</article>
+
 			</Section>
 		);
 	}
@@ -47,16 +52,4 @@ export default class Tests extends Component {
 
 const Section = styled.section`
 display:grid;
-margin: 2em;
-gap: 20px;
-grid-template-columns: minmax(200px,1fr);
-.analytic{
-    background: #1F2124;
-    box-shadow: 0 0 20px rgba(0,0,0,0.4);
-    border-radius: 1rem;
-    padding: 20px;
-    text-align: center;
-    color: white;
-    float: left;
-}
 `;

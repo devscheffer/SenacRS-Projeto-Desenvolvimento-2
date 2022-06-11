@@ -4,3 +4,4 @@
 .vs/
 pentaho/
 src/front/test/
+node_modules/

@@ -1,4 +1,5 @@
 /** @format */
+import styled from "styled-components";
 
 import React, {Component} from "react";
 import Chart1 from "./chart/chart1";
@@ -7,6 +8,8 @@ import Chart3 from "./chart/chart3";
 import CardServiceTime from "./card/service_time.component";
 import CardWaitingTime from "./card/waiting_time.component";
 import TicketsPending from "./card/pending.component";
+import NotTicketsPending from "./card/not_pending.component";
+import GerenteStat from "./list/gerente_list_stat.component";
 export default class AddTicket extends Component {
 	constructor(props) {
 		super(props);
@@ -22,22 +25,28 @@ export default class AddTicket extends Component {
 	}
 	render() {
 		return (
-			<div className="container_gerente">
-				<div className="card1">
-					<CardServiceTime />
+			<Section>
+				<GerenteStat />
+				<div className="container_gerente">
+					<div className="card1">
+					</div>
+					<div className="card2">
+					</div>
+					<div className="card3">
+					</div>
+					<div className="card4">
+					</div>
+					<div className="graph3">
+						<Chart1 />
+						<Chart2 />
+						<Chart3 />
+					</div>
 				</div>
-				<div className="card2">
-					<CardWaitingTime />
-				</div>
-				<div className="card3">
-					<TicketsPending />
-				</div>
-				<div className="graph3">
-					<Chart1 />
-					<Chart2 />
-					<Chart3 />
-				</div>
-			</div>
+			</Section>
 		);
 	}
 }
+const Section = styled.section`
+	display: grid;
+	grid-template-columns: repeat(auto-fill, 1fr);
+`;

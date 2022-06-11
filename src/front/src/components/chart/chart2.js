@@ -11,7 +11,7 @@ import {
 	YAxis,
 	CartesianGrid,
 } from "recharts";
-import {cardStyles} from "../ReusableStyles"; 
+import {cardStyles} from "../ReusableStyles";
 import ChartDataService from "../../services/chart.service";
 import React, {Component} from "react";
 
@@ -88,6 +88,9 @@ export default class Earnings extends Component {
 
 const Section = styled.section`
 	display: grid;
+    margin: 2em;
+	gap: 20px;
+	grid-template-columns: minmax(200px, 1fr);
 	min-height: 20rem;
 	${cardStyles}
 	padding: 2rem 0 0 0;

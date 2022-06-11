@@ -1,4 +1,5 @@
 /** @format */
+import styled from "styled-components";
 
 import React, {Component} from "react";
 import CardServiceTime from "./card/service_time.component";
@@ -6,6 +7,7 @@ import CardWaitingTime from "./card/waiting_time.component";
 import Card3 from "./card/estimate_waiting.component";
 import PendingId from "./card/pending_id.component";
 import Button from "./button/create_ticket.component";
+import ClienteStat from "./list/cliente_list_stat.component";
 export default class AddTicket extends Component {
 	constructor(props) {
 		super(props);
@@ -23,23 +25,14 @@ export default class AddTicket extends Component {
 
 	render() {
 		return (
-			<div className="container_cliente">
-				<div className="botao">
+			<Section>
 					<Button />
-				</div>
-				<div className="card1">
-					<CardServiceTime />
-				</div>
-				<div className="card2">
-					<CardWaitingTime />
-				</div>
-				<div className="card3">
-					<Card3 />
-				</div>
-				<div className="card4">
-					<PendingId />
-				</div>
-			</div>
+                    <ClienteStat />
+            </Section>
 		);
 	}
 }
+const Section = styled.section`
+	display: grid;
+	grid-template-columns: repeat(auto-fill, 1fr);
+`;

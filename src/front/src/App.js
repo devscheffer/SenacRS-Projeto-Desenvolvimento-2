@@ -12,7 +12,8 @@ import WaitingTime from "./components/card/waiting_time.component"
 import ServiceTime from "./components/card/service_time.component"
 import Pending from "./components/card/pending.component"
 import TicketPending from "./components/list/ticket_pending.component"
-import Call from "./components/button/call_ticket.component"
+import Test from "./components/test.component"
+import List from "./components/list/ticket_pending.component"
 class App extends Component {
 	render() {
 		return (
@@ -49,7 +50,8 @@ class App extends Component {
 						<Route path="/card/service_time" component={ServiceTime} />
 						<Route path="/card/pending" component={Pending} />
 						<Route path="/list/ticket_pending" component={TicketPending} />
-						<Route path="/button/call" component={Call} />
+						<Route path="/test" component={Test} />
+						<Route path="/list" component={List} />
 					</Switch>
 				</div>
 			</div>
