@@ -5,10 +5,6 @@ import React, {Component} from "react";
 import Chart1 from "./chart/chart1";
 import Chart2 from "./chart/chart2";
 import Chart3 from "./chart/chart3";
-import CardServiceTime from "./card/service_time.component";
-import CardWaitingTime from "./card/waiting_time.component";
-import TicketsPending from "./card/pending.component";
-import NotTicketsPending from "./card/not_pending.component";
 import GerenteStat from "./list/gerente_list_stat.component";
 export default class AddTicket extends Component {
 	constructor(props) {

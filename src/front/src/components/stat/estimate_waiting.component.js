@@ -22,7 +22,7 @@ export default class Tests extends Component {
 		let n_people = await CardDataService.get_pending_count(id)
         let n_people_data=n_people.data.total_user;
 		try {
-			let estimate_waiting = parseInt(service_time_data * n_people_data);
+			let estimate_waiting = parseInt(service_time_data * n_people_data??0);
 			this.setState({
 				estimate_waiting: estimate_waiting,
 			});

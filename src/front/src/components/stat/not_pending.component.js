@@ -28,17 +28,13 @@ export default class Tests extends Component {
 	render() {
 		return (
 			<Section>
-                                <article className="leaderboard__profile">
+				<article className="leaderboard__profile">
 					<h1>1</h1>
-					<span className="leaderboard__name">
-                    Pessoas atendidas
-					</span>
+					<span className="leaderboard__name">Pessoas atendidas</span>
 					<span className="leaderboard__value">
 						{this.state.not_pending_count}
-						<span>tkt</span>
 					</span>
 				</article>
-
 			</Section>
 		);
 	}
@@ -46,5 +42,4 @@ export default class Tests extends Component {
 
 const Section = styled.section`
 	display: grid;
-	 
 `;

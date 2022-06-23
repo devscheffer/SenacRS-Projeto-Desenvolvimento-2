@@ -2,10 +2,6 @@
 import styled from "styled-components";
 
 import React, {Component} from "react";
-import CardServiceTime from "./card/service_time.component";
-import CardWaitingTime from "./card/waiting_time.component";
-import Card3 from "./card/estimate_waiting.component";
-import PendingId from "./card/pending_id.component";
 import Button from "./button/create_ticket.component";
 import ClienteStat from "./list/cliente_list_stat.component";
 export default class AddTicket extends Component {

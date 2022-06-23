@@ -1,19 +1,13 @@
 /** @format */
 
-import React, {Component} from "react";
-import {Switch, Route, Link} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Component } from "react";
+import { Link, Route, Switch } from "react-router-dom";
 import "./App.css";
 
+import Atendente from "./components/atendente.component";
 import Cliente from "./components/cliente.component";
 import Gerente from "./components/gerente.component";
-import Atendente from "./components/atendente.component";
-import WaitingTime from "./components/card/waiting_time.component"
-import ServiceTime from "./components/card/service_time.component"
-import Pending from "./components/card/pending.component"
-import TicketPending from "./components/list/ticket_pending.component"
-import Test from "./components/test.component"
-import List from "./components/list/ticket_pending.component"
 class App extends Component {
 	render() {
 		return (
@@ -46,12 +40,6 @@ class App extends Component {
 						<Route exact path={["/", "/atendente"]} component={Atendente}/>
 						<Route exact path="/cliente" component={Cliente} />
 						<Route path="/gerente" component={Gerente} />
-						<Route path="/card/waiting_time" component={WaitingTime} />
-						<Route path="/card/service_time" component={ServiceTime} />
-						<Route path="/card/pending" component={Pending} />
-						<Route path="/list/ticket_pending" component={TicketPending} />
-						<Route path="/test" component={Test} />
-						<Route path="/list" component={List} />
 					</Switch>
 				</div>
 			</div>

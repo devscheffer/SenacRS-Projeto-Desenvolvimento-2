@@ -2,7 +2,6 @@
 import styled from "styled-components";
 
 import React, {Component} from "react";
-import TicketsPending from "./card/pending.component";
 import CallTicket from "./button/call_ticket.component";
 import ListTicket from "./list/ticket_pending.component.js";
 
