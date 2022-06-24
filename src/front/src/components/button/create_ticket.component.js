@@ -7,22 +7,22 @@ import ButtonDataService from "../../services/button.service";
 import React, {Component} from "react";
 
 export default class Tests extends Component {
-	state_default = {
-		id: null,
-		queue: "fila1",
-		description: "",
-		ticketChecked: false,
-		user: "person1",
-		submitted: false,
-		n_ticket_front: null,
-	};
 	constructor(props) {
 		super(props);
 		this.saveTicket = this.saveTicket.bind(this);
 		this.newTicket = this.newTicket.bind(this);
-
-		this.state = JSON.parse(localStorage.getItem("ticket"));
-        console.log(typeof(this.state))
+		let local_state = JSON.parse(localStorage.getItem("ticket"));
+		this.state = local_state.id
+			? local_state
+			: {
+					id: null,
+					queue: "fila1",
+					description: "",
+					ticketChecked: false,
+					user: "person1",
+					submitted: false,
+					n_ticket_front: null,
+			  };
 	}
 	newTicket() {
 		this.setState({

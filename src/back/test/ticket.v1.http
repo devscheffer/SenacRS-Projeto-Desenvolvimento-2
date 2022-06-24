@@ -1,5 +1,5 @@
 @base = http://localhost:8080/api/tickets/v1/ticket
-@id =1
+@id =213
 
 POST {{base}}/
 content-type: application/json
@@ -16,6 +16,11 @@ content-type: application/json
 }
 ###
 GET {{base}}/{{id}}
+content-type: application/json
+
+{}
+###
+GET {{base}}/call_next
 content-type: application/json
 
 {}

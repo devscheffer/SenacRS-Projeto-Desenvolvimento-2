@@ -3,35 +3,39 @@
 import styled from "styled-components";
 import {BsFillCalendar2WeekFill} from "react-icons/bs";
 import {cardStyles} from "../ReusableStyles";
-import TicketDataService from "../../services/ticket.service";
+import ButtonDataService from "../../services/button.service";
 import React, {Component} from "react";
 
-export default class Tests extends Component {
+export default class Call extends Component {
 	constructor(props) {
 		super(props);
-		this.get_next_ticket = this.get_next_ticket.bind(this);
-		this.updateticketChecked = this.updateticketChecked.bind(this);
+		this.ticketNext = this.ticketNext.bind(this);
+		this.ticketChecked = this.ticketChecked.bind(this);
 		this.state = {
 			tickets_pending: null,
 		};
 	}
-	async get_next_ticket() {
-		var nextTicket = await TicketDataService.getNext();
+	async ticketNext() {
 		try {
-			this.updateticketChecked(nextTicket.data[0].id, true);
-			return nextTicket.data[0].id;
+			var nextTicket = await ButtonDataService.ticket_next();
+			nextTicket = nextTicket.data.ticket_next;
+            console.log("teste1")
+			this.ticketChecked(nextTicket.id, true);
 		} catch (err) {
 			console.log(err);
 		}
 	}
-	async updateticketChecked(id, status) {
+	async ticketChecked(id, status) {
+        console.log("teste2")
+
+        try {
 		var data = {
 			id: id,
 			ticketChecked: status,
 			ticketChecked_ts: Date.now(),
 		};
-		const response = await TicketDataService.update(id, data);
-		try {
+        console.log(data)
+		const response = await ButtonDataService.ticket_update(id, data);
 			this.setState((prevState) => ({
 				currentTicket: {
 					...prevState.currentTicket,
@@ -41,8 +45,8 @@ export default class Tests extends Component {
 				},
 			}));
 			console.log(response.data);
-		} catch (e) {
-			console.log(e);
+		} catch (err) {
+			console.log(err);
 		}
 	}
 
@@ -52,10 +56,9 @@ export default class Tests extends Component {
 				<div className="analytic ">
 					<div className="content">
 						<h4>Chamar próximo ticket:</h4>
-
 						<button
 							className="m-3 btn btn-sm btn-danger"
-							onClick={this.get_next_ticket}
+							onClick={this.ticketNext}
 						>
 							Click
 						</button>

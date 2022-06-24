@@ -9,6 +9,7 @@ module.exports = (app) => {
 
     // Ticket
 	router.post("/v1/ticket", ticket.create);
+	router.get("/v1/ticket/call_next", ticket.call_next);
 	router.put("/v1/ticket/:id", ticket.update);
 	router.get("/v1/ticket/:id", ticket.id);
     // Card

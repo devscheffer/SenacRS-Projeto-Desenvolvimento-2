@@ -63,3 +63,31 @@ exports.id = async (req, res) => {
 		});
 	}
 };
+exports.call_next = async (req, res) => {
+    try {
+    const [query, metadata] = await db.sequelize.query(
+        `
+        select
+            id,
+            is_checked,
+            created_ts,
+            checked_ts
+        from
+            tickets t
+        where
+            is_checked = false
+        order by
+            id asc
+        limit 1;
+    `
+    );
+    let ticket_next = query[0];
+    console.log(ticket_next);
+    res.send({ticket_next: ticket_next});
+	} catch (e) {
+		res.status(500).send({
+			message: "Error retrieving Ticket with id=" + id,
+			error: e,
+		});
+	}
+};

@@ -11,8 +11,11 @@ class ButtonDataService {
 		return http.get(`/v1/ticket/${id}`);
 	}
 
-	ticket_update(id) {
-		return http.put(`/v1/ticket/${id}`);
+	ticket_update(id,data) {
+		return http.put(`/v1/ticket/${id}`,data);
+	}
+	ticket_next() {
+		return http.get(`/v1/ticket/call_next`);
 	}
 }
 
