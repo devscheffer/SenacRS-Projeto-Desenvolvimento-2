@@ -35,7 +35,7 @@ export default class Tests extends Component {
 					</span>
 					<span className="leaderboard__value">
 						{this.state.pending_count}
-						<span>tkt</span>
+						<span>qtd</span>
 					</span>
 				</article>
 
