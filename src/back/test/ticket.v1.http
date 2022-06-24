@@ -1,5 +1,5 @@
 @base = http://localhost:8080/api/tickets/v1/ticket
-@id =213
+@id =214
 
 POST {{base}}/
 content-type: application/json
@@ -11,6 +11,7 @@ PUT {{base}}/{{id}}
 content-type: application/json
 
 {
+    "id": {{id}},
     "is_checked": true,
     "checked_ts": "2022-06-01 15:00:59.039-0300"
 }

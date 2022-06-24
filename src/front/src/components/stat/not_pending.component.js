@@ -5,7 +5,7 @@ import {cardStyles} from "../ReusableStyles";
 import CardDataService from "../../services/card.service";
 import React, {Component} from "react";
 
-export default class Tests extends Component {
+export default class NotPending extends Component {
 	constructor(props) {
 		super(props);
 		this.not_pending_count = this.not_pending_count.bind(this);

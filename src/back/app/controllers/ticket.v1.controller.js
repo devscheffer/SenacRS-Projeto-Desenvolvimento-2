@@ -21,15 +21,18 @@ exports.create = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-	const id = req.params.id;
 	try {
+		const id = req.params.id;
+        
 		let num = await Ticket.update(req.body, {
 			where: {id: id},
 		});
 		console.log(num);
+		console.log("teste");
+		console.log(req.body);
 		if (num == 1) {
 			res.send({
-				message: "Ticket was updated successfully.",
+				message: `Ticket ${id} was updated successfully.`,
 			});
 		} else {
 			res.status(500).send({
@@ -64,9 +67,9 @@ exports.id = async (req, res) => {
 	}
 };
 exports.call_next = async (req, res) => {
-    try {
-    const [query, metadata] = await db.sequelize.query(
-        `
+	try {
+		const [query, metadata] = await db.sequelize.query(
+			`
         select
             id,
             is_checked,
@@ -80,10 +83,10 @@ exports.call_next = async (req, res) => {
             id asc
         limit 1;
     `
-    );
-    let ticket_next = query[0];
-    console.log(ticket_next);
-    res.send({ticket_next: ticket_next});
+		);
+		let ticket_next = query[0];
+		console.log(ticket_next);
+		res.send({ticket_next: ticket_next});
 	} catch (e) {
 		res.status(500).send({
 			message: "Error retrieving Ticket with id=" + id,

@@ -6,7 +6,7 @@ import {cardStyles} from "../ReusableStyles";
 import ButtonDataService from "../../services/button.service";
 import React, {Component} from "react";
 
-export default class Tests extends Component {
+export default class Create extends Component {
 	constructor(props) {
 		super(props);
 		this.saveTicket = this.saveTicket.bind(this);

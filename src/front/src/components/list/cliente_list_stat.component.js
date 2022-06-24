@@ -9,7 +9,7 @@ import Stat1 from "../stat/service_time.component"
 import Stat2 from "../stat/waiting_time.component"
 import Stat3 from "../stat/estimate_waiting.component"
 import Stat4 from "../stat/pending_id.component"
-export default class Tests extends Component {
+export default class ClientList extends Component {
 	constructor(props) {
 		super(props);
 		this.retrieveTickets = this.retrieveTickets.bind(this);

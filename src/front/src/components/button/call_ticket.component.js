@@ -19,23 +19,19 @@ export default class Call extends Component {
 		try {
 			var nextTicket = await ButtonDataService.ticket_next();
 			nextTicket = nextTicket.data.ticket_next;
-            console.log("teste1")
 			this.ticketChecked(nextTicket.id, true);
 		} catch (err) {
 			console.log(err);
 		}
 	}
 	async ticketChecked(id, status) {
-        console.log("teste2")
-
-        try {
-		var data = {
-			id: id,
-			ticketChecked: status,
-			ticketChecked_ts: Date.now(),
-		};
-        console.log(data)
-		const response = await ButtonDataService.ticket_update(id, data);
+		try {
+			var data = {
+				id: id,
+				is_checked: status,
+				checked_ts: Date.now(),
+			};
+			const response = await ButtonDataService.ticket_update(id, data);
 			this.setState((prevState) => ({
 				currentTicket: {
 					...prevState.currentTicket,

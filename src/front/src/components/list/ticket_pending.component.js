@@ -1,12 +1,11 @@
 /** @format */
 
 import styled from "styled-components";
-import {cardStyles} from "../ReusableStyles";
 import ListDataService from "../../services/list.service";
 import CardDataService from "../../services/card.service";
 import React, {Component} from "react";
 import moment from "moment";
-export default class Tests extends Component {
+export default class TicketPending extends Component {
 	constructor(props) {
 		super(props);
 		this.retrieveTickets = this.retrieveTickets.bind(this);
@@ -43,9 +42,9 @@ export default class Tests extends Component {
 			console.log(e);
 		}
 	}
-    async pending_count(id) {
-        try {
-            const res = await CardDataService.get_pending_count(id);
+	async pending_count(id) {
+		try {
+			const res = await CardDataService.get_pending_count(id);
 			this.setState({
 				pending_count: res.data.total_user,
 			});
@@ -93,11 +92,11 @@ export default class Tests extends Component {
 const Section = styled.section`
 	.leaderboard {
 		border-radius: 12px;
-        display: grid;
-        margin: 2em;
-        gap: 20px;
-        grid-template-columns: minmax(200px, 1fr);
-        background: #1F2124;
+		display: grid;
+		margin: 2em;
+		gap: 20px;
+		grid-template-columns: minmax(200px, 1fr);
+		background: #1f2124;
 
 		header {
 			--start: 15%;
@@ -156,7 +155,7 @@ const Section = styled.section`
 		}
 
 		&__profiles {
-            background: #1F2124;
+			background: #1f2124;
 
 			border-radius: 0 0 12px 12px;
 			padding: 15px 15px 20px;

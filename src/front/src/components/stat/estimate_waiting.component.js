@@ -5,7 +5,7 @@ import {cardStyles} from "../ReusableStyles";
 import React, {Component} from "react";
 import CardDataService from "../../services/card.service";
 
-export default class Tests extends Component {
+export default class EstimateWaiting extends Component {
 	constructor(props) {
 		super(props);
 		this.estimate_waiting = this.estimate_waiting.bind(this);
