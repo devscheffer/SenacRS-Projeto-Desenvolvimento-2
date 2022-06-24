@@ -13,7 +13,7 @@ exports.pending = async (req, res) => {
             cast(
                 extract (
                     EPOCH
-                    FROM (current_date - created_ts)
+                    FROM (CURRENT_TIMESTAMP - created_ts)
                 ) / 60 AS int
             ) as time_wait
         FROM tickets
