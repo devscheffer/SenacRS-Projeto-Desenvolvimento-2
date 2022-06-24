@@ -12,7 +12,7 @@ export default class AddTicket extends Component {
 			id: null,
 			queue: "fila1",
 			description: "",
-			ticketChecked: false,
+			is_checked: false,
 			user: "person1",
 			submitted: false,
 			n_ticket_front: null,

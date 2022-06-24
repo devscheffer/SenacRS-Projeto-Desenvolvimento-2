@@ -19,10 +19,12 @@ export default class TicketPending extends Component {
 			id: "",
 			pending_count: null,
 		};
+		this.refresh();
+	}
+	refresh() {
 		this.retrieveTickets();
 		this.pending_count(this.state.id);
 	}
-
 	setActiveTicket(ticket, index, id) {
 		this.setState({
 			currentTicket: ticket,

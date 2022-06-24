@@ -12,13 +12,14 @@ export default class Create extends Component {
 		this.saveTicket = this.saveTicket.bind(this);
 		this.newTicket = this.newTicket.bind(this);
 		let local_state = JSON.parse(localStorage.getItem("ticket"));
-		this.state = local_state.id
+        console.log("test",local_state.id && !local_state.is_checked)
+		this.state = local_state.id && !local_state.is_checked
 			? local_state
 			: {
 					id: null,
 					queue: "fila1",
 					description: "",
-					ticketChecked: false,
+					is_checked: false,
 					user: "person1",
 					submitted: false,
 					n_ticket_front: null,
@@ -29,7 +30,7 @@ export default class Create extends Component {
 			id: null,
 			queue: "fila1",
 			description: "",
-			ticketChecked: false,
+			is_checked: false,
 			user: "person1",
 			submitted: false,
 		});
@@ -49,7 +50,7 @@ export default class Create extends Component {
 				id: ticket_save.data.id,
 				queue: ticket_save.data.queue,
 				description: ticket_save.data.description,
-				ticketChecked: ticket_save.data.ticketChecked,
+				is_checked: ticket_save.data.is_checked,
 				user: ticket_save.data.user,
 				submitted: true,
 			});

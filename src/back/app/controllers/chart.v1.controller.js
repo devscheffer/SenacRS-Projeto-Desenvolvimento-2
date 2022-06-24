@@ -77,12 +77,12 @@ exports.chart2 = async (req, res) => {
                 ) AS time_id,
                 *
             FROM tickets
+            WHERE checked_ts IS NOT NULL
         ),
         base2 AS (
             SELECT DISTINCT time_id,
                 avg(checked_ts - created_ts) over (PARTITION by time_id) AS waiting_avg
             FROM base
-            WHERE checked_ts IS NOT NULL
         )
         SELECT time_id as n,
             cast(

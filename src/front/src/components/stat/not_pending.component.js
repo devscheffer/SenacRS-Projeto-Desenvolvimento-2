@@ -33,6 +33,7 @@ export default class NotPending extends Component {
 					<span className="leaderboard__name">Pessoas atendidas</span>
 					<span className="leaderboard__value">
 						{this.state.not_pending_count}
+						<span>qtd</span>
 					</span>
 				</article>
 			</Section>

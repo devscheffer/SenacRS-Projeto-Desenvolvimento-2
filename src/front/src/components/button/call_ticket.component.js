@@ -5,7 +5,7 @@ import {BsFillCalendar2WeekFill} from "react-icons/bs";
 import {cardStyles} from "../ReusableStyles";
 import ButtonDataService from "../../services/button.service";
 import React, {Component} from "react";
-
+import PendingList from "../list/ticket_pending.component"
 export default class Call extends Component {
 	constructor(props) {
 		super(props);
@@ -35,8 +35,8 @@ export default class Call extends Component {
 			this.setState((prevState) => ({
 				currentTicket: {
 					...prevState.currentTicket,
-					ticketChecked: status,
-					ticketChecked_ts: Date.now(),
+					is_checked: status,
+					checked_ts: Date.now(),
 					id: id,
 				},
 			}));
