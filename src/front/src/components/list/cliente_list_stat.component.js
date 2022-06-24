@@ -1,10 +1,8 @@
 /** @format */
 
 import styled from "styled-components";
-import {cardStyles} from "../ReusableStyles";
 import ListDataService from "../../services/list.service";
 import React, {Component} from "react";
-import moment from "moment";
 import Stat1 from "../stat/service_time.component"
 import Stat2 from "../stat/waiting_time.component"
 import Stat3 from "../stat/estimate_waiting.component"

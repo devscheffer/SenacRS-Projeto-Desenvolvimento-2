@@ -1,7 +1,6 @@
 /** @format */
 
 import styled from "styled-components";
-import {cardStyles} from "../ReusableStyles";
 import React, {Component} from "react";
 import CardDataService from "../../services/card.service";
 

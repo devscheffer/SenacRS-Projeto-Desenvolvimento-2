@@ -1,8 +1,6 @@
 /** @format */
 
 import styled from "styled-components";
-import {HiOutlineTicket} from "react-icons/hi";
-import {cardStyles} from "../ReusableStyles";
 import ButtonDataService from "../../services/button.service";
 import React, {Component} from "react";
 

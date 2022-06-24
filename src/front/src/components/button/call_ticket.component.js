@@ -1,11 +1,8 @@
 /** @format */
 
 import styled from "styled-components";
-import {BsFillCalendar2WeekFill} from "react-icons/bs";
-import {cardStyles} from "../ReusableStyles";
 import ButtonDataService from "../../services/button.service";
 import React, {Component} from "react";
-import PendingList from "../list/ticket_pending.component"
 export default class Call extends Component {
 	constructor(props) {
 		super(props);

@@ -11,7 +11,6 @@ import {
 	YAxis,
 	CartesianGrid,
 } from "recharts";
-import {cardStyles} from "../ReusableStyles";
 import ChartDataService from "../../services/chart.service";
 import React, {Component} from "react";
 
