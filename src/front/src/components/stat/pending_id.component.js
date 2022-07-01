@@ -30,7 +30,7 @@ export default class PendingId extends Component {
                 <article className="leaderboard__profile">
 					<h1>1</h1>
 					<span className="leaderboard__name">
-                    Total de pessoas antes de você
+                    Total de pessoas aguardando atendimento antes de você
 					</span>
 					<span className="leaderboard__value">
 						{this.state.pending_count}

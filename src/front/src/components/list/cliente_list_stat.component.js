@@ -3,10 +3,10 @@
 import styled from "styled-components";
 import ListDataService from "../../services/list.service";
 import React, {Component} from "react";
-import Stat1 from "../stat/service_time.component"
-import Stat2 from "../stat/waiting_time.component"
-import Stat3 from "../stat/estimate_waiting.component"
-import Stat4 from "../stat/pending_id.component"
+import Stat1 from "../stat/service_time.component";
+import Stat2 from "../stat/waiting_time.component";
+import Stat3 from "../stat/estimate_waiting.component";
+import Stat4 from "../stat/pending_id.component";
 export default class ClientList extends Component {
 	constructor(props) {
 		super(props);
@@ -55,13 +55,11 @@ export default class ClientList extends Component {
 							</span>
 						</h1>
 					</header>
-
 					<main className="leaderboard__profiles">
-                        <Stat1 />
-                        <Stat2 />
-                        <Stat3 />
-                        <Stat4 />
-
+						<Stat2 />
+						<Stat1 />
+						<Stat4 />
+						<Stat3 />
 					</main>
 				</article>
 			</Section>
@@ -72,11 +70,11 @@ export default class ClientList extends Component {
 const Section = styled.section`
 	.leaderboard {
 		border-radius: 12px;
-        display: grid;
-        margin: 2em;
-        gap: 20px;
-        grid-template-columns: minmax(200px, 1fr);
-        background: #1F2124;
+		display: grid;
+		margin: 2em;
+		gap: 20px;
+		grid-template-columns: minmax(200px, 1fr);
+		background: #1f2124;
 
 		header {
 			--start: 15%;
@@ -135,7 +133,7 @@ const Section = styled.section`
 		}
 
 		&__profiles {
-            background: #1F2124;
+			background: #1f2124;
 
 			border-radius: 0 0 12px 12px;
 			padding: 15px 15px 20px;
