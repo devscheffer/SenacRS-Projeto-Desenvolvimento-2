@@ -105,7 +105,8 @@ export default class Earnings extends Component {
 								fill="url(#colorUv)"
 								strokeWidth={3}
 								dot={{
-									stroke: "blue",
+									stroke: "#ffca13",
+                                        fill:"#ffca13",
 									strokeWidth: 1,
 									r: 4,
 									strokeDasharray: "",

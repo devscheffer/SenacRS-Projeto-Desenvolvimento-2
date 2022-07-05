@@ -3,7 +3,6 @@
 import styled from "styled-components";
 import {
 	Line,
-	Label,
 	LineChart,
 	Tooltip,
 	ResponsiveContainer,
@@ -12,7 +11,6 @@ import {
 	YAxis,
 	CartesianGrid,
 } from "recharts";
-import CardDataService from "../../services/card.service";
 import ChartDataService from "../../services/chart.service";
 import React, {Component} from "react";
 
@@ -20,7 +18,6 @@ export default class Earnings extends Component {
 	constructor(props) {
 		super(props);
 		this.chart1 = this.chart1.bind(this);
-		this.pending_count = this.pending_count.bind(this);
 
 		this.state = {
 			id: null,
@@ -34,27 +31,17 @@ export default class Earnings extends Component {
 			chart_data: {},
 		};
 		this.chart1();
-		this.pending_count();
 	}
 
 	async chart1() {
-		let res = await ChartDataService.get_chart1();
-		try {
-			let chart_data = res.data.chart1.sort((a, b) => a.n - b.n);
+        try {
+            let res = await ChartDataService.get_chart1();
+			let chart_data = res.data.chart1.sort((a, b) => parseInt(a.hora) - parseInt(b.hora));
+            console.log(chart_data)
 			this.setState({
 				chart_data: chart_data,
 			});
 			return chart_data;
-		} catch (err) {
-			console.log(err);
-		}
-	}
-	async pending_count(id) {
-		try {
-			const res = await CardDataService.get_pending_count(id);
-			this.setState({
-				pending_count: res.data.total_user,
-			});
 		} catch (err) {
 			console.log(err);
 		}
@@ -89,7 +76,7 @@ export default class Earnings extends Component {
 							>
 								<XAxis
 									height={50}
-									dataKey="n"
+									dataKey="hora"
 									tick={{fontSize: 20}}
 									label={{
 										value: "Horário do dia",
@@ -125,7 +112,8 @@ export default class Earnings extends Component {
 									fill="url(#colorUv)"
 									strokeWidth={3}
 									dot={{
-										stroke: "blue",
+										stroke: "#ffca13",
+                                        fill:"#ffca13",
 										strokeWidth: 1,
 										r: 4,
 										strokeDasharray: "",
@@ -141,7 +129,8 @@ export default class Earnings extends Component {
 									fill="url(#colorPv)"
 									strokeWidth={3}
 									dot={{
-										stroke: "red",
+										stroke: "#ffca13",
+                                        fill:"#ffca13",
 										strokeWidth: 1,
 										r: 4,
 										strokeDasharray: "",

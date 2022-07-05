@@ -7,15 +7,10 @@ const Op = db.Sequelize.Op;
 exports.chart1 = async (req, res) => {
 	const [query, metadata] = await db.sequelize.query(
 		`
-        WITH recursive tb_hour (n) AS (
-            SELECT 0
-            UNION ALL
-            SELECT (tb_hour.n + 1) n
-            FROM tb_hour
-            WHERE tb_hour.n < 23
-        ),
+        WITH --
         tb_created AS (
-            SELECT DISTINCT extract(
+            SELECT --
+                DISTINCT extract(
                     HOUR
                     FROM created_ts
                 ) AS created_ts_hour,
@@ -28,7 +23,8 @@ exports.chart1 = async (req, res) => {
             FROM tickets
         ),
         tb_checked AS (
-            SELECT DISTINCT extract(
+            SELECT --
+                DISTINCT extract(
                     HOUR
                     FROM checked_ts
                 ) AS checked_ts_hour,
@@ -39,26 +35,38 @@ exports.chart1 = async (req, res) => {
                     )
                 ) AS atendido
             FROM tickets
+            WHERE checked_ts IS NOT NULL
+        ),
+        base AS (
+            SELECT --
+                coalesce(cr.created_ts_hour, ck.checked_ts_hour) AS hora,
+                coalesce (cr.entrada, 0) AS entrada,
+                coalesce (ck.atendido, 0) AS atendido
+            FROM tb_created cr
+                FULL JOIN tb_checked ck ON cr.created_ts_hour = ck.checked_ts_hour
         )
-        SELECT h.n
-            ,coalesce (cr.entrada, 0) as entrada
-            ,coalesce (ck.atendido, 0) as atendido
-        FROM tb_hour h
-            LEFT JOIN tb_created cr ON h.n = cr.created_ts_hour
-            LEFT JOIN tb_checked ck ON h.n = ck.checked_ts_hour
-        ORDER BY h.n ASC;
+        SELECT --
+            hora,
+            entrada,
+            atendido
+        FROM base
+        ORDER BY hora ASC
         `
 	);
 	try {
 		console.log(
 			query.map((item) => {
-				item.n = item.n - 3;
-				if (item.n < 0) {
-					item.n = 24 + item.n;
+                hora = item.hora
+				hora = hora - 3;
+				if (hora < 0) {
+					hora = 24 + hora;
 				}
+                item.hora=hora
 				return item;
 			})
 		);
+        console.log("gerson test")
+        console.log(query)
 		res.send({chart1: query});
 	} catch (err) {
 		res.sendStatus(500).send({
