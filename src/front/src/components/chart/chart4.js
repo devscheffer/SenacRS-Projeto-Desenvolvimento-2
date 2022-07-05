@@ -34,9 +34,20 @@ export default class Earnings extends Component {
 	}
 
 	async chart1() {
-        try {
-            let res = await ChartDataService.get_chart1();
-			let chart_data = res.data.chart1.sort((a, b) => parseInt(a.hora) - parseInt(b.hora));
+		try {
+			let res = await ChartDataService.get_chart1();
+			let chart_data = res.data.chart1.sort(
+				(a, b) => parseInt(a.hora) - parseInt(b.hora)
+			);
+			let acc = 0;
+			for (let i = 0; i < chart_data.length; i = i + 1) {
+				let entrada = parseInt(chart_data[i].entrada);
+				let atendido = parseInt(chart_data[i].atendido);
+				chart_data[i].diff = entrada - atendido;
+				acc = acc + chart_data[i].diff;
+				chart_data[i].acc = acc;
+				console.log(chart_data[i]);
+			}
 			this.setState({
 				chart_data: chart_data,
 			});
@@ -53,7 +64,7 @@ export default class Earnings extends Component {
 					<header>
 						<h1 className="leaderboard__title">
 							<span className="leaderboard__title--top">
-								Fluxo de clientes
+								Comportamento da fila
 							</span>
 							<span className="leaderboard__title--bottom">
 								Estatísticas Gerais
@@ -97,40 +108,23 @@ export default class Earnings extends Component {
 										fill: "white",
 									}}
 									tick={true}
-                                    tickSize={1}
+                                    allowDecimals={false}
 								/>
 								<Legend verticalAlign="top" />
 								<CartesianGrid strokeDasharray="3 3" />
 								<Tooltip />
 								<Line
-									name="Pessoas atendidas"
+									name="Pessoas aguardando atendimento"
 									connectNulls
 									type="monotone"
-									dataKey="atendido"
+									dataKey="acc"
 									stroke="#8884d8"
 									fillOpacity={1}
 									fill="url(#colorUv)"
 									strokeWidth={3}
 									dot={{
 										stroke: "#ffca13",
-                                        fill:"#ffca13",
-										strokeWidth: 1,
-										r: 4,
-										strokeDasharray: "",
-									}}
-								/>
-								<Line
-									name="Entrada de clientes"
-									connectNulls
-									type="monotone"
-									dataKey="entrada"
-									stroke="#82ca9d"
-									fillOpacity={1}
-									fill="url(#colorPv)"
-									strokeWidth={3}
-									dot={{
-										stroke: "#ffca13",
-                                        fill:"#ffca13",
+										fill: "#ffca13",
 										strokeWidth: 1,
 										r: 4,
 										strokeDasharray: "",

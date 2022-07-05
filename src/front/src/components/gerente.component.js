@@ -5,6 +5,7 @@ import React, {Component} from "react";
 import Chart1 from "./chart/chart1";
 import Chart2 from "./chart/chart2";
 import Chart3 from "./chart/chart3";
+import Chart4 from "./chart/chart4";
 import GerenteStat from "./list/gerente_list_stat.component";
 export default class AddTicket extends Component {
 	constructor(props) {
@@ -34,6 +35,7 @@ export default class AddTicket extends Component {
 					</div>
 					<div className="graph3">
 						<Chart1 />
+						<Chart4 />
 						<Chart2 />
 						<Chart3 />
 					</div>
