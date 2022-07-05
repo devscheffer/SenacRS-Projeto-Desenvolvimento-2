@@ -3,6 +3,7 @@
 import styled from "styled-components";
 import {
 	Line,
+	Label,
 	LineChart,
 	Tooltip,
 	ResponsiveContainer,
@@ -21,7 +22,6 @@ export default class Earnings extends Component {
 		this.chart1 = this.chart1.bind(this);
 		this.pending_count = this.pending_count.bind(this);
 
-
 		this.state = {
 			id: null,
 			queue: "fila1",
@@ -35,13 +35,12 @@ export default class Earnings extends Component {
 		};
 		this.chart1();
 		this.pending_count();
-
 	}
 
 	async chart1() {
 		let res = await ChartDataService.get_chart1();
 		try {
-            let chart_data = res.data.chart1.sort((a, b) => a.n-b.n);
+			let chart_data = res.data.chart1.sort((a, b) => a.n - b.n);
 			this.setState({
 				chart_data: chart_data,
 			});
@@ -76,53 +75,81 @@ export default class Earnings extends Component {
 						</h1>
 					</header>
 					<div className="chart">
-					<ResponsiveContainer width="100%" height="100%">
-						<LineChart
-							width={500}
-							height={400}
-							data={this.state.chart_data}
-							margin={{top: 10, right: 30, left: 0, bottom: 0}}
-						>
-							<XAxis dataKey="n" />
-							<YAxis />
-							<Legend verticalAlign="top"/>
-							<CartesianGrid strokeDasharray="3 3" />
-							<Tooltip />
-							<Line
-                            name = "Quantidade de pessoas atendidas"
-								connectNulls
-								type="monotone"
-								dataKey="atendido"
-								stroke="#8884d8"
-								fillOpacity={1}
-								fill="url(#colorUv)"
-								strokeWidth={3}
-								dot={{
-									stroke: "blue",
-									strokeWidth: 1,
-									r: 4,
-									strokeDasharray: "",
+						<ResponsiveContainer width="100%" height="100%">
+							<LineChart
+								width={500}
+								height={400}
+								data={this.state.chart_data}
+								margin={{
+									top: 10,
+									right: 30,
+									left: 0,
+									bottom: 0,
 								}}
-							/>
-							<Line
-                            name = "Entrada de novos clientes"
-								connectNulls
-								type="monotone"
-								dataKey="entrada"
-								stroke="#82ca9d"
-								fillOpacity={1}
-								fill="url(#colorPv)"
-								strokeWidth={3}
-								dot={{
-									stroke: "red",
-									strokeWidth: 1,
-									r: 4,
-									strokeDasharray: "",
-								}}
-							/>
-						</LineChart>
-					</ResponsiveContainer>
-				</div>
+							>
+								<XAxis
+									height={50}
+									dataKey="n"
+									tick={{fontSize: 20}}
+									label={{
+										value: "Horário do dia",
+										angle: 0,
+										position: "middle",
+										dy: 15,
+										dx: 0,
+										fill: "white",
+									}}
+								/>
+								<YAxis
+									width={90}
+									label={{
+										value: "Qtd de Pessoas",
+										angle: -90,
+										position: "middle",
+										dy: 0,
+										dx: -20,
+										fill: "white",
+									}}
+									tick={true}
+								/>
+								<Legend verticalAlign="top" />
+								<CartesianGrid strokeDasharray="3 3" />
+								<Tooltip />
+								<Line
+									name="Pessoas atendidas"
+									connectNulls
+									type="monotone"
+									dataKey="atendido"
+									stroke="#8884d8"
+									fillOpacity={1}
+									fill="url(#colorUv)"
+									strokeWidth={3}
+									dot={{
+										stroke: "blue",
+										strokeWidth: 1,
+										r: 4,
+										strokeDasharray: "",
+									}}
+								/>
+								<Line
+									name="Entrada de clientes"
+									connectNulls
+									type="monotone"
+									dataKey="entrada"
+									stroke="#82ca9d"
+									fillOpacity={1}
+									fill="url(#colorPv)"
+									strokeWidth={3}
+									dot={{
+										stroke: "red",
+										strokeWidth: 1,
+										r: 4,
+										strokeDasharray: "",
+									}}
+								/>
+							</LineChart>
+						</ResponsiveContainer>
+					</div>
 				</article>
 			</Section>
 		);
@@ -170,11 +197,11 @@ const Section = styled.section`
 
 	.leaderboard {
 		border-radius: 12px;
-        display: grid;
-        margin: 2em;
-        gap: 20px;
-        grid-template-columns: minmax(200px, 1fr);
-        background: #1F2124;
+		display: grid;
+		margin: 2em;
+		gap: 20px;
+		grid-template-columns: minmax(200px, 1fr);
+		background: #1f2124;
 
 		header {
 			--start: 15%;
@@ -233,7 +260,7 @@ const Section = styled.section`
 		}
 
 		&__profiles {
-            background: #1F2124;
+			background: #1f2124;
 
 			border-radius: 0 0 12px 12px;
 			padding: 15px 15px 20px;

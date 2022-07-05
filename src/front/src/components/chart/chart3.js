@@ -67,13 +67,36 @@ export default class Earnings extends Component {
 							data={this.state.chart_data}
 							margin={{top: 10, right: 30, left: 0, bottom: 0}}
 						>
-							<XAxis dataKey="n" />
-							<YAxis />
+							<XAxis
+									height={50}
+									dataKey="n"
+									tick={{fontSize: 20}}
+									label={{
+										value: "Horário do dia",
+										angle: 0,
+										position: "middle",
+										dy: 15,
+										dx: 0,
+										fill: "white",
+									}}
+								/>
+								<YAxis
+									width={90}
+									label={{
+										value: "Minutos",
+										angle: -90,
+										position: "middle",
+										dy: 0,
+										dx: -20,
+										fill: "white",
+									}}
+									tick={true}
+								/>
 							<Legend verticalAlign="top"/>
 							<CartesianGrid strokeDasharray="3 3" />
 							<Tooltip />
 							<Line
-                            name = "Duração média de atendimento (min)"
+                            name = "Duração do atendimento (média)"
 								connectNulls
 								type="monotone"
 								dataKey="service_time_avg"
